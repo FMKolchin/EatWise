@@ -1,5 +1,5 @@
 
-import { NutritionValues } from "./NutritionValues";
+import { NutritionValues } from "./Nutrition";
 export class Food{
 
     id:number;

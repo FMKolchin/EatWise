@@ -9,7 +9,7 @@ class Food {
 const foodSchema = new mongoose.Schema<Food>({
     id:{type: Number,required: true},
     productName: {type: String,required: true},
-    productValues:{type: String,required: true},//points to nutrition
+    productValues:{type: String,required: true},//points to nutrition.S
 });
 
 const FoodModel = mongoose.model<Food>("Example", foodSchema);

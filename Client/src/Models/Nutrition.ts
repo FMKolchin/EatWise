@@ -1,4 +1,4 @@
-export class NutritionValues{
+export class Nutrition{
     calories:number =0;
     totalFat:number =0;
     saturatedFat:number =0;

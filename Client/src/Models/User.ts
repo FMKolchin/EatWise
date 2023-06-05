@@ -1,4 +1,6 @@
-class User{
+import { Nutrition } from "./Nutrition";
+
+export class User{
     id:number = 0;
     username: string ="";
     password:string = "";
@@ -7,10 +9,10 @@ class User{
     height:number =0;
     weight:number =0;
     sportLevel:number =0;
-    dailyConsumption?:NutritionValues;
-    recommendedConsumption?:NutritionValues;
-    averageConsumption?:NutritionValues;
-    weeklyConsumption:NutritionValues[] = [];
+    dailyConsumption?:Nutrition;
+    recommendedConsumption?:Nutrition;
+    averageConsumption?:Nutrition;
+    weeklyConsumption:Nutrition[] = [];
     daysUpdated:number = 0;
 
 
