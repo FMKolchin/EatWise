@@ -1,8 +1,8 @@
 import express, { Express, Request, Response } from 'express';
 const Users = require('./Controllers/user.controller');
 const usernameValidation = require('./Middlewares/user.middleware');
-const cors = require('cors')
-
+const cors = require('cors');
+const dbConnect = require('./ConnectDB');
 const app: Express = express();
 const port = 8000;
 
