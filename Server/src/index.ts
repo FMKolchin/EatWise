@@ -4,10 +4,8 @@ const usernameValidation = require('./Middlewares/user.middleware');
 const cors = require('cors')
 
 const app: Express = express();
-//app.options('*', cors()); // preflight OPTIONS; put before other routes
 const port = 8000;
 
-console.log("hi index node")
 
 
 app.use(cors());
