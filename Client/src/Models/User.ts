@@ -14,6 +14,7 @@ export class User{
     averageConsumption?:Nutrition;
     weeklyConsumption:Nutrition[] = [];
     daysUpdated:number = 0;
+    lastUpdate?: Date;
 
 
 

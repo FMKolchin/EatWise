@@ -318,7 +318,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
+# config file & data
+Config/
 
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,windows,macos,linux,test

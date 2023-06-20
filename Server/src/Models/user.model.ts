@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 class User {
-    id:number = 0;
+    _id:string = "";
     username: string ="";
     password:string = "";
     email:string = "";
@@ -9,31 +9,31 @@ class User {
     height:number =0;
     weight:number =0;
     sportLevel:number =0;
-    dailyConsumption?:Number;
-    recommendedConsumption?:Number;
-    averageConsumption?:Number;
-    weeklyConsumption:Number = 0;
+    dailyConsumption?:string="";
+    recommendedConsumption?:string="";
+    averageConsumption?:string ="";
+    weeklyConsumption:string = "";
     daysUpdated:number = 0;
 
 
 }
 
 const userSchema = new mongoose.Schema<User>({
-  id:{ type: Number, required: true },
+  _id:{ type: String, required: true },
   username: { type: String, required: true },
   password:{ type: String, required: true },
   email:{ type: String, required: true },
-  age:{ type: Number, required: true },
-  height:{ type: Number, required: true },
-  weight:{ type: Number, required: true },
-  sportLevel:{ type: Number, required: true },
-  dailyConsumption:{ type: Number, required: true },//points to nutrition model.
-  recommendedConsumption:{ type: Number, required: true },//points to nutrition model.
-  averageConsumption:{ type: Number, required: true },//points to nutrition model.
-  weeklyConsumption:{ type: Number, required: true }, //points to week model.
-  daysUpdated:{ type: Number, required: true },
+  age:{ type: Number},
+  height:{ type: Number},
+  weight:{ type: Number},
+  sportLevel:{ type: Number },
+  dailyConsumption:{ type: String},//points to nutrition model.
+  recommendedConsumption:{ type: String},//points to nutrition model.
+  averageConsumption:{ type: String },//points to nutrition model.
+  weeklyConsumption:{ type: String }, //points to week model.
+  daysUpdated:{ type: Number},
 });
 
-const UserModel = mongoose.model<User>("Example", userSchema);
+const UserModel = mongoose.model<User>("Users", userSchema);
 
 export { User, UserModel };

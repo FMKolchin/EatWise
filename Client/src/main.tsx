@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // import { createRoot } from 'react-dom';
 import { Home } from './Components/Home/Home';
 import {Fallback} from './Components/Fallback/Fallback';
+import { RegisterPersonalDetails } from './Components/RegisterPersonalDetails/RegisterPersonalDetails';
 
 interface Route {
   path: string;
@@ -31,6 +32,10 @@ const routes: Route[] = [
     path: '/home',
     Component: Home,
   },
+  {
+    path:'/registerPersonalDetails',
+    Component: RegisterPersonalDetails
+  }
 ];
 
 const router = createBrowserRouter(routes);

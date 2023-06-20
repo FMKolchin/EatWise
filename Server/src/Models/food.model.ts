@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
 class Food {
-    id:number =0;
+    _id: string ="";
     productName: string = "";
     productValues:Number = 0;
 }
 
 const foodSchema = new mongoose.Schema<Food>({
-    id:{type: Number,required: true},
+    _id:{type: String,required: true},
     productName: {type: String,required: true},
     productValues:{type: String,required: true},//points to nutrition.S
 });

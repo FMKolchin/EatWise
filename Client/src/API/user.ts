@@ -6,36 +6,51 @@ export const loginUser = async (username : string, password : string):Promise<st
     let data:AxiosResponse|null = null;
     let res :string|null = null;
    
-    try {
         data= await axios.post(`${config.api}/user/login`, {username: username, password: password});
-        res = data?.data.username+' '+data?.data.password;
-
-    } catch (error:any) {
-        alert("error "+data+error.message);
-    }
+        // if(data?.data == "userNotFound"){
+        //     alert('לא מצאנו את הפרטים שלך, בטוח שנרשמת?');
+        //     throw new Error("user not found");
+        // }
+        // else{
+        res = data?.data;
+// }
         return res;
    
 }
 
 export const signUpUser = async (username : string,email: string, password : string):Promise<string|null> =>{
-    alert("start userApi")
+    console.log("start userApi")
     // debugger;
     let data:AxiosResponse|null = null;
     let res :string|null = null;
-   
     try {
-        data= await axios.post(`${config.api}/user/signup`, {username: username,email: email, password: password});
-        res = data?.data.username+' '+data?.data.password+' '+data?.data.email;
-    //    debugger;
-       console.log(res);
-        alert("fine "+res);
+        console.log("in try api")
+        data =await axios.post(`${config.api}/user/signup`, {username: username,email: email, password: password});
+        if(data?.status &&(data?.status >299 || data?.status < 200)){
+            console.log("not valid status, return error "+data?.status);
+            throw new Error("error inserting");
+        }
+        console.log("finish try user api")
 
     } catch (error:any) {
-        alert("error "+data+error.message);
+        console.log("in catch user api "+error.message);
+        if(error.response && error.response.status === 400){
+            console.log("ERROR: my error user api "+error);
+        }
+        else{
+            console.log("ERROR:not my error user api "+error);
+             //alert("ERROR: " + error.response.message);
+        }
+        throw error;
     }
-
-        alert(res);
+        console.log("result of userApi: "+res)
         return res;
    
+}
+
+export const SavePersonalDetails = async (age:number,weight:number,height:number) =>{
+    console.log("begin api function");
+    await axios.post(`${config.api}/user/savePersonalDetails`,{age:age,weight:weight,height:height});
+    console.log("finish api function");
 }
 

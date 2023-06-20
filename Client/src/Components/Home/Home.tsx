@@ -7,6 +7,7 @@ export const Home = () =>{
         <div>
            <h1>home page</h1> 
    <AddFood></AddFood>
+   
    </div>
     ) 
 }

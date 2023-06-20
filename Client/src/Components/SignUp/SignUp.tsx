@@ -24,19 +24,28 @@ export const SignUp = (): JSX.Element => {
   const navigate:NavigateFunction = useNavigate();
 
     const authDetails = async () =>{
+      console.log("start auth details");
 //בדיקת ולידציה לשם ולסיסמא
        if(validateUsername()){
+        console.log("valid user name = true");
         try{
-            const data:String|null =  await signUpUser(username,email,password);
-            console.log(data);//ניתן למחוק בהמשך לטפל בנתוני הדאטה
-            navigate('/home', { replace: true });
+          alert("in try sign up!!!!!!!!")
+            await signUpUser(username,password,email);
+           //ניתן למחוק בהמשך לטפל בנתוני הדאטה
+            console.log("before navigate after signUPUser");
+            navigate('/registerPersonalDetails', { replace: true });
+            console.log("after navigate");
         }catch{
+          console.log("error in signup");
             //דיווח למשתמש על התקלה
-        }
+           alert("/דיווח למשתמש על התקלה");
+          }
        }
        else{
+        console.log("valid user name = false");
         //דיווח למשתמש על בעיה בוולידציה
        }
+       console.log("finish auth details");
     }
     
     const validateUsername = () =>{

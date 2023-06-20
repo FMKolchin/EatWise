@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 class Nutrition {
-    nutritionId:number=0;
+    _id:string="";
     calories:number =0;
     totalFat:number =0;
     saturatedFat:number =0;
@@ -15,7 +15,7 @@ class Nutrition {
 }
 
 const nutritionSchema = new mongoose.Schema<Nutrition>({
-    nutritionId:{type:Number, required:true},
+    _id:{type:String, required:true},
     calories:{type:Number, required:true},
     totalFat:{type:Number, required:true},
     saturatedFat:{type:Number, required:true},

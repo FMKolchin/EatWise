@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 class Week {
-    weekId:number = 0;
+    _id:string = "";
     sunday:number = 0;
     monday:number = 0;
     tuesday:number = 0;
@@ -12,7 +12,7 @@ class Week {
 }
 
 const weekSchema = new mongoose.Schema<Week>({
-  weekId:{ type: Number, required: true },
+  _id:{ type: String, required: true },
   sunday:{ type: Number, required: true },
   monday:{ type: Number, required: true },
   tuesday:{ type: Number, required: true },

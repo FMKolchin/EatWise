@@ -1,15 +1,66 @@
+import { ClientError, NotFoundError } from "../Models/Error";
+import { User, UserModel } from "../Models/user.model";
+const objectId = require("mongodb").ObjectId;
+import { codeJWT, decodeJWT } from "./token.service";
 
- export const   login =(username : string, password : string):string=>{
-       console.log("start user service login")
-       debugger;
-       console.log(username+","+password);
-       return username+","+password;
-   }
-  export const signup=(username : string, password : string,email:string):string=>{
-    console.log("start user service login")
-    debugger;
-    console.log(username+","+password+","+email);
-    return username+","+password+","+email;
+
+export const login = async (username: string, password: string): Promise<string> => {
+  let foundUser:User[] = await UserModel.find({ username: username, password: password });
+  if (foundUser.length === 0) {
+    throw new NotFoundError();
+  }
+  let user:User = foundUser[0];
+  const token = codeJWT(user.username, user.email,user._id);
+  return token;
+}
+
+
+export const signup = async (username: string, password: string, email: string): Promise<string> => {
+  console.log("start signup service");
+  const _id = new objectId();
+  console.log("before userModel find");
+  const foundUsers = await UserModel.find({ email: email });
+  console.log("after userModel find "+foundUsers);
+  let createdUser:User;
+  if (foundUsers.length == 0) {
+    console.log("in if no users with same email");
+     createdUser =await UserModel.create({ _id: _id, username: username, password: password, email: email })
+     console.log("usere createrd "+createdUser);
+  }
+  else {
+    console.log("user email exist throw error here! ");
+    throw new ClientError("you are already connected with this email account");
+  }
+
+  //create & return token
+  console.log("create and return token");
+  let user:User = createdUser;
+  const token = codeJWT(user.username, user.email,user._id);
+  return token;
+}
+
+export const getUser = async (_id:string): Promise<User> => {
+  let user =await UserModel.find({ _id: _id});
+  return user[0];
+}
+
+
+
+export const savePersonalDetails = async (age:number,weight:number,height:number,token:string):Promise<void> => {
+  console.log("begin service function");
+   let user:User =await decodeJWT(token);
+   console.log(`user from token: ${JSON.stringify(user)}`);
+   let fullUser:User|null =await UserModel.findById(user._id);
+   console.log(`user from DB: ${JSON.stringify(fullUser)}`);
+   fullUser!.age = age;
+   fullUser!.weight = weight;
+   fullUser!.height = height;
+   await UserModel.updateOne(fullUser!);
+   console.log("finish service function");
+   
+
+
+
 }
 
 

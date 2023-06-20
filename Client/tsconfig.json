@@ -19,6 +19,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "../Server/src/Models/Error.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

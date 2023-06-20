@@ -16,10 +16,12 @@ export const Login = ():JSX.Element => {
        if(validatePassword() && validateUsername()){
         try{
             const data:string|null =  await loginUser(username, password);
+            alert(data);
             console.log(data);//ניתן למחוק בהמשך לטפל בנתוני הדאטה
             navigate('/home', { replace: true });
-        }catch{
+        }catch(err:any){
             //דיווח למשתמש על התקלה
+            alert(err.message);
         }
        }
        else{
