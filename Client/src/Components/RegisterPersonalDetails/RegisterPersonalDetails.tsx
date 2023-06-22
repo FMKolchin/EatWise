@@ -3,6 +3,7 @@ import { useState } from "react"
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import {SavePersonalDetails} from '../../API/user';
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { Nutrition } from "../../Models/Nutrition";
 
 
 
@@ -10,14 +11,34 @@ export const  RegisterPersonalDetails = ()=>{
     const [age,setAge] = useState<number>(0);
     const [weight,setWeight] = useState<number>(0);
     const [height,setHeight] = useState<number>(0);
+    let BMI:number =0;
     const navigate:NavigateFunction = useNavigate();
 
-    const savePersonalDetailsFunc = () =>{
-        console.log("before api function");
-        SavePersonalDetails(age!,weight!,height!);
-        console.log("after api function");
-        navigate('/home',{replace:true});
 
+
+    const savePersonalDetailsFunc = async() =>{
+        try {
+            console.log("before api function register personal details");
+            let recommendedConsomption:Nutrition = calculateRecommendedConsomption();
+            await SavePersonalDetails(age!,weight!,height!,recommendedConsomption);
+            console.log("after api function register personal details");
+            navigate('/home',{replace:true});
+        } catch (error:any) {
+            alert(error.message+" error in savePersonalDetails");
+        }
+
+    }
+    const calculateRecommendedConsomption =():Nutrition =>{
+        //calculate
+        return new Nutrition(0,0,0,0,0,0,0,0,0,);
+    }
+    const calculateBMI = ()=>{
+         BMI = weight/Math.pow(height,2);
+    }
+    const calculateProteinRecommendedCons =() =>{
+        if(BMI > 30 ){
+            console.log("a lot protein")
+        }
     }
     return(
         <div>

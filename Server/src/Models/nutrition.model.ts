@@ -27,6 +27,6 @@ const nutritionSchema = new mongoose.Schema<Nutrition>({
     proteins:{type:Number, required:true},
 });
 
-const NutritionModel = mongoose.model<Nutrition>("Example", nutritionSchema);
+const NutritionModel = mongoose.model<Nutrition>("NutritionalValues", nutritionSchema);
 
 export { Nutrition, NutritionModel };

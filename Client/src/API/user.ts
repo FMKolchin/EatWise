@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import config from '../config';
+import { Nutrition } from '../Models/Nutrition';
+import Cookies from 'js-cookie';
 
 
 export const loginUser = async (username : string, password : string):Promise<string|null> =>{
@@ -12,6 +14,8 @@ export const loginUser = async (username : string, password : string):Promise<st
         //     throw new Error("user not found");
         // }
         // else{
+        Cookies.set('jwt',data?.data,{expires:30})
+        console.log("token in client"+data?.data);
         res = data?.data;
 // }
         return res;
@@ -30,6 +34,8 @@ export const signUpUser = async (username : string,email: string, password : str
             console.log("not valid status, return error "+data?.status);
             throw new Error("error inserting");
         }
+        Cookies.set('jwt',data?.data,{expires:30});
+       console.log("token in client"+data?.data);
         console.log("finish try user api")
 
     } catch (error:any) {
@@ -48,9 +54,9 @@ export const signUpUser = async (username : string,email: string, password : str
    
 }
 
-export const SavePersonalDetails = async (age:number,weight:number,height:number) =>{
-    console.log("begin api function");
-    await axios.post(`${config.api}/user/savePersonalDetails`,{age:age,weight:weight,height:height});
-    console.log("finish api function");
+export const SavePersonalDetails = async (age:number,weight:number,height:number,recommendedConsomption:Nutrition) =>{
+    console.log("begin api function save personal details age:"+age+" weight "+weight+" height "+height," token "+Cookies.get().jwt);
+    await axios.post(`${config.api}/user/savePersonalDetails`,{age:age,weight:weight,height:height,recommendedConsomption:recommendedConsomption,token:Cookies.get().jwt});
+    console.log("finish api function save personal details");
 }
 

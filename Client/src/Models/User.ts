@@ -16,6 +16,8 @@ export class User{
     daysUpdated:number = 0;
     lastUpdate?: Date;
 
+    
+
 
 
 }

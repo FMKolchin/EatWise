@@ -1,8 +1,6 @@
-import express, { Express, NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 const router = express.Router();
-
 import {login,savePersonalDetails,signup}  from '../Services/user.service';
-import { ClientError } from '../Models/Error';
 
 const bodyParser = require('body-parser');
 const jsonParse = bodyParser.json();
@@ -14,30 +12,30 @@ router.get('/', (req: Request, res: Response) => {
 });
 
 //Post
-router.post('/login', jsonParse, (req: Request, res: Response,next:NextFunction) => {
+router.post('/login', jsonParse,async (req: Request, res: Response)  => {
   const { username, password } = req.body;
-  let result;
+  let result:string;
   try {
-       result = login(username, password);
+       result = await login(username, password);
   } catch (error:any) {
     console.log(error.message+"  error message!!");
     return res.status(400).send({message: error.message});
   }
 
-
-  res.cookie("jwt",result,{httpOnly: true, sameSite:'lax',maxAge: 30*24*60*60*1000});
+  
 });
 
 //Post
 router.post('/signup', jsonParse, async (req: Request, res: Response) => {
   console.log("start signup POST");
+  
     const { username,email, password } = req.body;
     console.log("before signup service");
-    let result;
+    let result:string;
     try {
       console.log("start try user controller");
        result = await signup(username,email, password);
-       console.log("token value in controller"+result)
+       console.log("token value in controller "+result)
        console.log("finish try user controller")
     } catch (error) {
       console.log("start catch user controller");
@@ -45,19 +43,36 @@ router.post('/signup', jsonParse, async (req: Request, res: Response) => {
     }
     
     console.log("after signup service");
-    res.cookie('jwt',result,{httpOnly: true,maxAge: 30*24*60*60*1000});
-    console.log("finish signup POST");
+    
+    
+    res.send(result);
+
 });
 
 router.post('/savePersonalDetails', jsonParse, async (req: Request, res:Response)=>{
-    console.log("begin controller function");
-    const {age,weight,height} = req.body;
-    console.log(`cookies: ${req.cookies}`)
-    let token:string = req.cookies['jwt'];
-    console.log(`token from cookie: ${token}`);
-    savePersonalDetails(age,weight,height,token);
-    console.log("finish controller function");
-    
+    try {
+      console.log("begin controller function");
+      // console.log(+" :req.body");
+      let age:number = parseInt(req.body.age);
+      let weight:number = parseInt(req.body.weight);
+      let height:number = parseInt(req.body.height);
+      let recommendedConsomption = req.body.recommendedConsomption;
+      let token:string = req.body.token;
+
+      // const {age,weight,height,recommendedConsomption,token} = req.body;
+      console.log(recommendedConsomption._id+"  =recommendedConsomption.id");
+      console.log(`cookies: ${req.cookies}`);
+      console.log("token "+token)
+      // let token:string = req.cookies['jwt'];
+      // console.log(`token from cookie: ${token}`);
+     await savePersonalDetails(age,weight,height,recommendedConsomption,token);
+      console.log("finish controller function");
+      res.send("successful saving");
+    } catch (error:any) {
+      res.send(error.message+ " error in controller saving personal Data")
+    }
+   
+
 })
 
 module.exports = router;
