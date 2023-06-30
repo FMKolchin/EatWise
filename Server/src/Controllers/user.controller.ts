@@ -56,6 +56,8 @@ router.post('/savePersonalDetails', jsonParse, async (req: Request, res:Response
       let age:number = parseInt(req.body.age);
       let weight:number = parseInt(req.body.weight);
       let height:number = parseInt(req.body.height);
+      let sportLevel:number = parseInt(req.body.sportLevel);
+      let gender:number = parseInt(req.body.gender);
       let recommendedConsomption = req.body.recommendedConsomption;
       let token:string = req.body.token;
 
@@ -65,7 +67,7 @@ router.post('/savePersonalDetails', jsonParse, async (req: Request, res:Response
       console.log("token "+token)
       // let token:string = req.cookies['jwt'];
       // console.log(`token from cookie: ${token}`);
-     await savePersonalDetails(age,weight,height,recommendedConsomption,token);
+     await savePersonalDetails(age,weight,height,sportLevel,gender,recommendedConsomption,token);
       console.log("finish controller function");
       res.send("successful saving");
     } catch (error:any) {

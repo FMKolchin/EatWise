@@ -9,6 +9,7 @@ class User {
     height:number =0;
     weight:number =0;
     sportLevel:number =0;
+    gender:number = 0;
     dailyConsumption?:string="";
     recommendedConsumption?:string="";
     averageConsumption?:string ="";
@@ -27,6 +28,7 @@ const userSchema = new mongoose.Schema<User>({
   height:{ type: Number},
   weight:{ type: Number},
   sportLevel:{ type: Number },
+  gender:{type:Number},
   dailyConsumption:{ type: String},//points to nutrition model.
   recommendedConsumption:{ type: String},//points to nutrition model.
   averageConsumption:{ type: String },//points to nutrition model.

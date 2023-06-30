@@ -9,12 +9,14 @@ export class User{
     height:number =0;
     weight:number =0;
     sportLevel:number =0;
-    dailyConsumption?:Nutrition;
-    recommendedConsumption?:Nutrition;
-    averageConsumption?:Nutrition;
+    gender:number = 0;
+    dailyConsumption?:Nutrition | undefined= new Nutrition(0,0,0,0,0,0,0);
+    recommendedConsumption?:Nutrition |undefined= new Nutrition(0,0,0,0,0,0,0);
+    averageConsumption?:Nutrition |undefined= new Nutrition(0,0,0,0,0,0,0);
     weeklyConsumption:Nutrition[] = [];
     daysUpdated:number = 0;
-    lastUpdate?: Date;
+    lastUpdate?: string;
+    
 
     
 

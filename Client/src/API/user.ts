@@ -54,9 +54,9 @@ export const signUpUser = async (username : string,email: string, password : str
    
 }
 
-export const SavePersonalDetails = async (age:number,weight:number,height:number,recommendedConsomption:Nutrition) =>{
+export const SavePersonalDetails = async (age:number,weight:number,height:number,sportLevel:number,gender:number,recommendedConsomption:Nutrition) =>{
     console.log("begin api function save personal details age:"+age+" weight "+weight+" height "+height," token "+Cookies.get().jwt);
-    await axios.post(`${config.api}/user/savePersonalDetails`,{age:age,weight:weight,height:height,recommendedConsomption:recommendedConsomption,token:Cookies.get().jwt});
+    await axios.post(`${config.api}/user/savePersonalDetails`,{age:age,weight:weight,height:height,sportLevel:sportLevel,gender:gender,recommendedConsomption:recommendedConsomption,token:Cookies.get().jwt});
     console.log("finish api function save personal details");
 }
 

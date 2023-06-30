@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -82,6 +82,15 @@ const declareDatafromUser = (user: User)=>{
 }
 
 export function DisplayDailyConsomption(props:any) {
-    declareDatafromUser(props.user);
-  return <Bar height={300} width={500} options={options} data={data} />;
+  const [stateData,setStateData] = useState(data);
+  
+    
+
+    useEffect(()=>{
+      
+      setStateData(data);
+      declareDatafromUser(props.user);
+    },[data,props.user]);
+  
+  return <Bar id="bar-chart" height={300} width={500} options={options} data={stateData} />;
 }

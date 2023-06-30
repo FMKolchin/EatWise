@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 const Users = require('./Controllers/user.controller');
 const Token = require('./Controllers/token.controller');
+const Nutrition = require('./Controllers/nutrition.controller');
 const connectDB = require('./ConnectDB');
 const cors = require('cors');
 const app: Express = express();
@@ -19,6 +20,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/user',Users);
 app.use('/token',Token);
+app.use('/nutrition',Nutrition)
 app.use(errorHandler);
 
 app.listen(port, () => {

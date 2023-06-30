@@ -13,6 +13,7 @@ export const decodeJWT = async (token: string): Promise<User> => {
     const { _id } = decodedToken;
     console.log("id :" + _id);
     const user: User = await getUser(_id);
+    console.log("user from token :" + user)
     return user;
 }
 //function gets user details and returns token
@@ -60,5 +61,6 @@ export const validateJwt = (token: string): boolean => {
         return false; // Token verification failed
     }
 };
+
 
 

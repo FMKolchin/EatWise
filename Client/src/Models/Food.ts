@@ -7,12 +7,14 @@ export class Food{
     productValues:Nutrition;
 
 
-    constructor(id:number,productName:string,calories :number ,totalFat :number, saturatedFat:number, transFat :number ,cholesterol :number ,carbohydrates :number, sodium :number,sugars:number,proteins:number)
+    constructor(id:number,productName:string,calories :number ,totalFat :number,cholesterol :number ,carbohydrates :number, sodium :number,sugars:number,proteins:number)
     {
          this.id=id;
          this.productName=productName;
-         this.productValues=new Nutrition(calories  ,totalFat , saturatedFat, transFat  ,cholesterol  ,carbohydrates, sodium ,sugars,proteins);
+         this.productValues=new Nutrition(calories  ,totalFat  ,cholesterol  ,carbohydrates, sodium ,sugars,proteins);
 
     }
+
+    
     
 }

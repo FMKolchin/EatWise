@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import $ from 'jquery';
 import { FoodOption } from "../FoodOption/FoodOption";
 import {Food} from "../../Models/Food"
+import { InputAdornment, List, TextField } from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
 
 export const AddFood = ():JSX.Element => {
-    const [foodQuery, setFoodQuery] = useState("");
+    const [foodQuery, setFoodQuery] = useState<string>();
     const [foodList , setFoodList] = useState<Food[]>([]);
    const insertFoodToObject = (obj:any[]) =>
    {
@@ -21,17 +23,33 @@ export const AddFood = ():JSX.Element => {
             q: foodQuery // query for 'jones'
         };
         $.get('https://data.gov.il/api/3/action/datastore_search', data, (d) => { insertFoodToObject(d.result.records); });
-        // foodList.forEach((e)=>alert(e.shmmitzrach));
 
     }, [foodQuery])
     return (
-        <div>
-            <input id="foodQuery" autoComplete="true" type="text" value={foodQuery} onChange={e => setFoodQuery(e.target.value)} />
-            <input id="testEating" autoComplete="false" type="checkbox"></input>
-          <ul>
-                {foodList.map((e:Food) => <FoodOption key={e.id} food={e}></FoodOption>)}
-            </ul>
-            
-        </div>
-    )
+        <List
+          sx={{
+            width: '100%',
+            maxWidth: 360,
+            bgcolor: 'background.paper',
+            position: 'relative',
+            overflow: 'auto',
+            maxHeight: 300,
+            '& ul': { padding: 0 },
+          }}
+          subheader={<li />}
+        >
+                
+                <TextField  variant="filled" fullWidth  id="searchTextBox" value={foodQuery} onChange={e=>setFoodQuery(e.target.value)}  InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon></SearchIcon>
+            </InputAdornment>
+          ),
+        }}/>
+                {foodList.map((item:Food) => (
+                  <FoodOption key={item.id} food={item}></FoodOption>
+                ))}
+        </List>
+      );
 }
+

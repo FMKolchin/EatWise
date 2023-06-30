@@ -44,7 +44,7 @@ export const getUser = async (_id: string): Promise<User> => {
   let user = await UserModel.find({ _id: _id });
   return user[0];
 }
-export const savePersonalDetails = async (age: number, weight: number, height: number, recommendedConsomption: Nutrition, token: string): Promise<void> => {
+export const savePersonalDetails = async (age: number, weight: number, height: number,sportLevel:number,gender:number, recommendedConsomption: Nutrition, token: string): Promise<void> => {
   //save recommeded consomption to nutrition table db
   console.log("in savePersonalDetails service function just started!!!");
 
@@ -60,11 +60,15 @@ export const savePersonalDetails = async (age: number, weight: number, height: n
       fullUser.age = age;
       fullUser.weight = weight;
       fullUser.height = height;
+      fullUser.gender = gender;
+      fullUser.sportLevel = sportLevel;
       fullUser.recommendedConsumption = recommendedConsomption._id;
+      console.log("just before update user details... ###########");
+      console.log(JSON.stringify(fullUser));
       await UserModel.replaceOne({ _id: fullUser._id }, fullUser);
     }
   } catch (error: any) {
-    console.log(error.message);
+    console.log(error.message+" @@@@@@@@@@@@@@@@@@@@@@@@@@");
   }
 
 
