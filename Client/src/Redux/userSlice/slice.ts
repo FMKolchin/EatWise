@@ -21,6 +21,12 @@ const slice=createSlice({
             console.log("in success init "+action.payload);
              state.user=action.payload;
         },
+        onAddToDailyConsomptionRequest:(state,action)=>{
+
+        },
+        onAddToDailyConsomptionSuccess:(state,action)=>{
+            state.user = action.payload;
+        }
     }
 })
 
@@ -29,7 +35,7 @@ const getState=(state:any)=>{
 }
 
 export const selectors={
-    getUser:createSelector(getState,(state)=>state),
+    getUser:createSelector(getState,(state)=>state.user),
     // initUser:createSelector(getState,(state)=>state)
 
 }

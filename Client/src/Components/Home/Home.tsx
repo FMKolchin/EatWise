@@ -30,7 +30,7 @@ export const Home = () => {
                 // console.log(u);
                 dispatch(actions.onInitUserRequest());
                 // const user = useSelector(selectors.getUser);
-                console.log(user);
+                console.log("redux user "+user);
             }
          };
          checkValid();

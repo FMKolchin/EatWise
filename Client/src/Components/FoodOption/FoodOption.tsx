@@ -2,12 +2,13 @@ import { Divider, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import { Food } from "../../Models/Food";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectors } from "../../Redux/userSlice/slice";
+import { actions, selectors } from "../../Redux/userSlice/slice";
+import { User } from "../../Models/User";
 
 
 export const FoodOption = (props: any) => {
     const food:Food= props.food;
-    // const user = useSelector(selectors.getUser);
+    const user:User = useSelector(selectors.getUser);
     const dispatch = useDispatch();
 
 
@@ -15,7 +16,7 @@ export const FoodOption = (props: any) => {
       event: React.MouseEvent<HTMLDivElement, MouseEvent>,
       index: number,
     ) => {
-        // dispatch(addProduct({food:food}))
+         dispatch(actions.onAddToDailyConsomptionRequest({user:user,nutrition:food.productValues}))
         //do what you need to add food details to what eaten
     };
     

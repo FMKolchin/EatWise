@@ -34,7 +34,7 @@ export const  RegisterPersonalDetails = ()=>{
     }
     const calculateRecommendedConsumption =():Nutrition =>{
         let recommendedCalaries:number = recommendedCalories(age,weight,height,gender)
-        return new Nutrition(recommendedCalaries,recommendedTotalFat(recommendedCalaries),recommendedCholesterol(),recommendedFiber(age),recommendedSodium(),recommendedSugar(),recommendedProtein(weight));
+        return new Nutrition("",recommendedCalaries,recommendedTotalFat(recommendedCalaries),recommendedCholesterol(),recommendedFiber(age),recommendedSodium(),recommendedSugar(),recommendedProtein(weight));
     }
 
     function handleChangeSportLevel(event: SelectChangeEvent<number>): void {

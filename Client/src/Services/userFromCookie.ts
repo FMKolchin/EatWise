@@ -20,9 +20,9 @@ export const userFromCookie =async () :Promise<User>=>{
     user.sportLevel = tempUser.sportLevel;
     user.gender = tempUser.gender;
     try{
-    user.averageConsumption = await nutritionById(tempUser.averageConsumption)??new Nutrition(0,0,0,0,0,0,0);
-    user.dailyConsumption =await nutritionById( tempUser.dailyConsumption)??new Nutrition(0,0,0,0,0,0,0);
-    user.recommendedConsumption =await nutritionById( tempUser.recommendedConsumption)??new Nutrition(0,0,0,0,0,0,0);
+    user.averageConsumption = await nutritionById(tempUser.averageConsumption)??new Nutrition("",0,0,0,0,0,0,0);
+    user.dailyConsumption =await nutritionById( tempUser.dailyConsumption)??new Nutrition("",0,0,0,0,0,0,0);
+    user.recommendedConsumption =await nutritionById( tempUser.recommendedConsumption)??new Nutrition("",0,0,0,0,0,0,0);
     }
     catch{
         console.log("error in updateing user Consumption...");
