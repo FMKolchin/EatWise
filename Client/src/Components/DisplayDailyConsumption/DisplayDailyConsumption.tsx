@@ -81,7 +81,7 @@ const declareDatafromUser = (user: User)=>{
 
 }
 
-export function DisplayDailyConsomption(props:any) {
+export function DisplayDailyConsumption(props:any) {
   const [stateData,setStateData] = useState(data);
   
     

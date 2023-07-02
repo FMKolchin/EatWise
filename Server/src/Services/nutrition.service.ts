@@ -12,6 +12,10 @@ export const getNutritionById = async (id: string,): Promise<Nutrition | null> =
     return nutrition;
 }
 
+export const createNutrition = async (nutrition:Nutrition): Promise<Nutrition> => {
+    return await NutritionModel.create(nutrition);
+}
+
 
 
 

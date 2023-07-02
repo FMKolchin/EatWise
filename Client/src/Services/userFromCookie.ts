@@ -25,7 +25,7 @@ export const userFromCookie =async () :Promise<User>=>{
     user.recommendedConsumption =await nutritionById( tempUser.recommendedConsumption)??new Nutrition(0,0,0,0,0,0,0);
     }
     catch{
-        console.log("error in updateing user consomption...");
+        console.log("error in updateing user Consumption...");
     }
 
     user.daysUpdated = tempUser.daysUpdated;

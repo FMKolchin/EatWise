@@ -56,6 +56,6 @@ export const data = {
   ],
 };
 
-export function DisplayWeeklyConsomption() {
+export function DisplayWeeklyConsumption() {
   return <Line  options={options} data={data}/>
 }

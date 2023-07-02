@@ -1,4 +1,3 @@
-import { Food } from "./Food";
 
 export class Nutrition{
     calories:number =0;

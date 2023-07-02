@@ -23,8 +23,8 @@ export const  RegisterPersonalDetails = ()=>{
     const savePersonalDetailsFunc = async() =>{
         try {
             console.log("before api function register personal details");
-            let recommendedConsomption:Nutrition = calculateRecommendedConsomption();
-            await SavePersonalDetails(age,weight,height,sportLevel,gender,recommendedConsomption);
+            let recommendedConsumption:Nutrition = calculateRecommendedConsumption();
+            await SavePersonalDetails(age,weight,height,sportLevel,gender,recommendedConsumption);
             console.log("after api function register personal details");
             navigate('/home',{replace:true});
         } catch (error:any) {
@@ -32,7 +32,7 @@ export const  RegisterPersonalDetails = ()=>{
         }
 
     }
-    const calculateRecommendedConsomption =():Nutrition =>{
+    const calculateRecommendedConsumption =():Nutrition =>{
         let recommendedCalaries:number = recommendedCalories(age,weight,height,gender)
         return new Nutrition(recommendedCalaries,recommendedTotalFat(recommendedCalaries),recommendedCholesterol(),recommendedFiber(age),recommendedSodium(),recommendedSugar(),recommendedProtein(weight));
     }

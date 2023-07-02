@@ -12,7 +12,7 @@ export const AddFood = ():JSX.Element => {
    {
       const tempList:Food[] = [];
       obj.forEach((e:any) => {
-         tempList.push(new Food (e._id,e.shmmitzrach,e.food_energy,e.total_fat,e.saturated_fat,e.trans_fatty_acids == null ? 0 : e.trans_fatty_acids,e.cholesterol,e.carbohydrates,e.sodium,e.total_sugars,e.protein));
+         tempList.push(new Food (e._id,e.shmmitzrach,e.food_energy,e.total_fat,e.cholesterol,e.carbohydrates,e.sodium,e.total_sugars,e.protein));
       });
       setFoodList(tempList);
    }

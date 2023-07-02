@@ -9,6 +9,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Home } from './Components/Home/Home';
 import {Fallback} from './Components/Fallback/Fallback';
 import { RegisterPersonalDetails } from './Components/RegisterPersonalDetails/RegisterPersonalDetails';
+import configStoreFunction from './Redux/configStore';
+import { Provider } from 'react-redux';
+
 
 interface Route {
   path: string;
@@ -39,10 +42,14 @@ const routes: Route[] = [
 ];
 
 const router = createBrowserRouter(routes);
+const userStore = configStoreFunction();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <Provider store={userStore} >
     <RouterProvider router={router} fallbackElement={<Fallback/>}/>
-  </React.StrictMode>
+    </Provider>
+  // </React.StrictMode>
+  
 );
 

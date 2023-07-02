@@ -1,5 +1,5 @@
 import { User } from "../Models/user.model";
-import { getUser } from "./user.service";
+import { getUserById } from "./user.service";
 const connectDB = require('../ConnectDB');
 
 const jwt = require('jsonwebtoken');
@@ -12,9 +12,9 @@ export const decodeJWT = async (token: string): Promise<User> => {
     const decodedToken = jwt.decode(splitToken, config.TOKEN_KEY) as { [key: string]: string };
     const { _id } = decodedToken;
     console.log("id :" + _id);
-    const user: User = await getUser(_id);
+    const user: User|null = await getUserById(_id);
     console.log("user from token :" + user)
-    return user;
+    return user??new User();
 }
 //function gets user details and returns token
 export const codeJWT = (username: string, email: string, _id: string) => {

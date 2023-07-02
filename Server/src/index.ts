@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from 'express';
-const Users = require('./Controllers/user.controller');
-const Token = require('./Controllers/token.controller');
-const Nutrition = require('./Controllers/nutrition.controller');
+const Users = require('./Routes/user.route');
+const Token = require('./Routes/token.route');
+const Nutrition = require('./Routes/nutrition.route');
 const connectDB = require('./ConnectDB');
 const cors = require('cors');
 const app: Express = express();

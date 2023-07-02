@@ -2,17 +2,16 @@ import { AddFood } from "../AddFood/AddFood"
 import { ExistCookie } from '../../Services/ExistCookie'
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { DisplayDailyConsomption } from "../DisplayDailyConsomption/DisplayDailyConsomption";
-import { User } from "../../Models/User";
-import { userFromCookie } from "../../Services/userFromCookie";
+import { DisplayDailyConsumption } from "../DisplayDailyConsumption/DisplayDailyConsumption"
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../../features/UserSlice";
+import { actions, selectors } from "../../Redux/userSlice/slice";
+
 
 
 
 export const Home = () => {
     const navigate: NavigateFunction = useNavigate();
-    const user = useSelector((state: any):User=>state.UserSlice.user);
+    const user = useSelector(selectors.getUser);
     console.log(JSON.stringify(user)+" user from toolkit");
     const dispatch = useDispatch();
     // let user:User = new User();
@@ -26,10 +25,11 @@ export const Home = () => {
                 navigate('/login', { replace: true });
             }
             else{
-                console.log("home before user from cookie");
-                let u:User = await userFromCookie();
-                console.log(u);
-                dispatch(updateUser({user:u}));
+                // console.log("home before user from cookie");
+                // let u:User = await userFromCookie();
+                // console.log(u);
+                dispatch(actions.onInitUserRequest());
+                // const user = useSelector(selectors.getUser);
                 console.log(user);
             }
          };
@@ -43,7 +43,7 @@ export const Home = () => {
             <h1>home page</h1>
             <AddFood></AddFood>
             {/* <DisplayCharts></DisplayCharts> */}
-            <DisplayDailyConsomption user={user}></DisplayDailyConsomption>
+            <DisplayDailyConsumption user={user}></DisplayDailyConsumption>
 
         </div>
     )
