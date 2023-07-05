@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const jsonParse = bodyParser.json();
 
 router.get('/:id',getNutritionByIdCtrl);
-router.put('/addNutValues',bodyParser,addNutValuesCtrl)
+router.put('/addNutValues',jsonParse,addNutValuesCtrl)
 
 
 module.exports = router;

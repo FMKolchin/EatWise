@@ -1,7 +1,7 @@
 import { AddFood } from "../AddFood/AddFood"
 import { ExistCookie } from '../../Services/ExistCookie'
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { DisplayDailyConsumption } from "../DisplayDailyConsumption/DisplayDailyConsumption"
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "../../Redux/userSlice/slice";
@@ -11,7 +11,8 @@ import { actions, selectors } from "../../Redux/userSlice/slice";
 
 export const Home = () => {
     const navigate: NavigateFunction = useNavigate();
-    const user = useSelector(selectors.getUser);
+    const userRedux = useSelector(selectors.getUser);
+    const [user,setUser] = useState(userRedux);
     console.log(JSON.stringify(user)+" user from toolkit");
     const dispatch = useDispatch();
     // let user:User = new User();
@@ -37,6 +38,10 @@ export const Home = () => {
        
     }
         , []);
+
+        useEffect(()=>{
+            setUser(userRedux);
+        },[userRedux])
 
     return (
         <div>

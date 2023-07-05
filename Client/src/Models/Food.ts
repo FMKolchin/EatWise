@@ -11,7 +11,7 @@ export class Food{
     {
          this.id=id;
          this.productName=productName;
-         this.productValues=new Nutrition(calories  ,totalFat  ,cholesterol  ,carbohydrates, sodium ,sugars,proteins);
+         this.productValues=new Nutrition("",calories  ,totalFat  ,cholesterol  ,carbohydrates, sodium ,sugars,proteins);
 
     }
 

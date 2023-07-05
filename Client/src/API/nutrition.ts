@@ -12,8 +12,15 @@ export const nutritionById =async (id:string):Promise<Nutrition | null> =>{
 }
 
 export const addNutValues = async (user:User,nut:Nutrition):Promise<User>=>{
-   await axios.put(`${config.api}/nutrition/addNutValues`,{nutId:user.dailyConsumption?._id,nutValues:nut});
+   console.log("take care of click");
+   try {
+      await axios.put(`${config.api}/nutrition/addNutValues`,{nutId:user.dailyConsumption?._id,nutValues:nut});
+   console.log("after put nut addVal");
       user.dailyConsumption = await nutritionById(user.dailyConsumption!._id)??undefined;
-      return user;
+      
+   } catch (error:any) {
+      console.log(error.message+"hi")
+   }
+   return user;
    
 }

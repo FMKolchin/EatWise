@@ -16,6 +16,7 @@ export const FoodOption = (props: any) => {
       event: React.MouseEvent<HTMLDivElement, MouseEvent>,
       index: number,
     ) => {
+        console.log("before click dispatch");
          dispatch(actions.onAddToDailyConsomptionRequest({user:user,nutrition:food.productValues}))
         //do what you need to add food details to what eaten
     };

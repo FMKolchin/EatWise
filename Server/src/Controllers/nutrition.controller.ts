@@ -15,4 +15,5 @@ export const  getNutritionByIdCtrl=  async (req: Request, res: Response) => {
     const nutId = req.body.nutId;
     const nutValues = req.body.nutValues;
     await addNutValues(nutId, nutValues);
+    res.send();
   }
