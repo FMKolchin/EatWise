@@ -7,26 +7,29 @@ import { User } from "../../Models/User";
 
 
 export const FoodOption = (props: any) => {
-    const food:Food= props.food;
-    const user:User = useSelector(selectors.getUser);
-    const dispatch = useDispatch();
+  const food: Food = props.food;
+  const user: User = useSelector(selectors.getUser);
+  const dispatch = useDispatch();
 
 
-    const handleListItemClick = (
-      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-      index: number,
-    ) => {
-        console.log("before click dispatch");
-         dispatch(actions.onAddToDailyConsomptionRequest({user:user,nutrition:food.productValues}))
-        //do what you need to add food details to what eaten
-    };
-    
+  const handleListItemClick = (
 
-    return (
-        <><ListItemButton 
-        onClick={(event) =>{console.log("cliced now: "+JSON.stringify(food));handleListItemClick(event, food.id)} }
-        >
-            <ListItemText primary={food.productName} />
-        </ListItemButton><Divider /></>
-      );
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number,
+  ) => {
+    console.log("before click dispatch");
+    dispatch(actions.onAddToDailyConsomptionRequest({ user: user, nutrition: food.productValues }));
+    dispatch(actions.onUpdateDaysReqest({ user: user.id }));
+    //do what you need to add food details to what eaten
+  };
+
+
+  return (
+    <>
+      <ListItemButton onClick={(event) => { console.log("cliced now: " + JSON.stringify(food)); handleListItemClick(event, food.id) }}>
+        <ListItemText primary={food.productName} />
+      </ListItemButton>
+      <Divider />
+    </>
+  );
 }

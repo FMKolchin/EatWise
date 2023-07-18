@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import $ from 'jquery';
 import { FoodOption } from "../FoodOption/FoodOption";
 import {Food} from "../../Models/Food"
-import { InputAdornment, List, TextField } from "@mui/material";
+import { Box, Card, InputAdornment, List, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 export const AddFood = ():JSX.Element => {
@@ -26,6 +26,8 @@ export const AddFood = ():JSX.Element => {
 
     }, [foodQuery])
     return (
+      <Box sx={{ minWidth: 275 }}>
+      <Card  variant="outlined">
         <List
           sx={{
             width: '100%',
@@ -39,7 +41,7 @@ export const AddFood = ():JSX.Element => {
           subheader={<li />}
         >
                 
-                <TextField  variant="filled" fullWidth  id="searchTextBox" value={foodQuery} onChange={e=>setFoodQuery(e.target.value)}  InputProps={{
+                <TextField  variant="filled"   fullWidth  id="searchTextBox" value={foodQuery} onChange={e=>setFoodQuery(e.target.value)}  InputProps={{
           startAdornment: (
             <InputAdornment position="start">
               <SearchIcon></SearchIcon>
@@ -50,6 +52,7 @@ export const AddFood = ():JSX.Element => {
                   <FoodOption key={item.id} food={item}></FoodOption>
                 ))}
         </List>
+        </Card></Box>
       );
 }
 

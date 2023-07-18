@@ -13,6 +13,7 @@ export const Login = ():JSX.Element => {
 
     const authDetails = async () =>{
 //בדיקת ולידציה לשם ולסיסמא
+        console.log(validatePassword() && validateUsername());
        if(validatePassword() && validateUsername()){
         try{
             const data:string|null =  await loginUser(username, password);

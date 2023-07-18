@@ -1,11 +1,14 @@
 import express, { Request, Response } from 'express';
-import { login, savePersonalDetails, signup } from '../Services/user.service';
+import { login, savePersonalDetails, signup, updateDays } from '../Services/user.service';
 
 export const loginCtrl = async (req: Request, res: Response)  => {
     const { username, password } = req.body;
     let result:string;
     try {
+        console.log("before login service");
          result = await login(username, password);
+         console.log(result);
+         res.send(result);
     } catch (error:any) {
       console.log(error.message+"  error message!!");
       return res.status(400).send({message: error.message});
@@ -52,4 +55,9 @@ export const savePersonalDetailsCtrl = async (req: Request, res:Response)=>{
     } catch (error:any) {
       res.send(error.message+ " error in controller saving personal Data")
     }
+}
+
+export const updateDaysCtrl = async (req:Request, res:Response):Promise<void> =>{
+  console.log(req);
+  res.send(await updateDays(req.body.user));
 }

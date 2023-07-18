@@ -15,7 +15,7 @@ import { codeJWT, decodeJWT } from "./token.service";
     throw new NotFoundError();
   }
   let user: User = foundUser[0];
-  const token = codeJWT(user.username, user.email, user._id);
+  const token = codeJWT(user.username, user.email, user._id,);
   return token;
 }
  export const signup = async (username: string, password: string, email: string): Promise<string> => {
@@ -35,6 +35,7 @@ import { codeJWT, decodeJWT } from "./token.service";
 }
 
  export const getUserById = async (_id: string): Promise<User | null> => {
+  console.log("id "+_id);
   return await UserModel.findById(_id);
 
 }
@@ -44,7 +45,9 @@ import { codeJWT, decodeJWT } from "./token.service";
 }
 
  const updateUser = async (user: User): Promise<void> => {
+  console.log("((((((((((((((((((((((((((((((((((((((((((((((");
   await UserModel.replaceOne({ _id: user._id }, user);
+  console.log(`Updated `+user );
 }
 
 const updateUserPersonalDetails = async (userId: string, age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: string, dailyConsumption: string) => {
@@ -75,6 +78,32 @@ const updateUserPersonalDetails = async (userId: string, age: number, weight: nu
   catch (error: any) {
     console.log("error in savePersonal Details " + error.message);
   }
+}
+
+export const updateDays = async (userID:string):Promise<User|null> => {
+  let fullDate:Date = new Date();
+  let date:Date = new Date(fullDate.getFullYear(), fullDate.getMonth(), fullDate.getDate());
+  console.log(date);
+  let user:User|null = await getUserById(userID);
+  if(user){
+    if(date.toString()!=user.lastUpdate){
+    user.lastUpdate = date.toString();
+    console.log(user);
+    if(!user.daysUpdated){
+      user.daysUpdated = 1;
+    }
+    else{
+      user.daysUpdated++;
+    }
+    await updateUser(user);
+    console.log("user "+user);
+    return user;
+  }
+  }
+  
+  return null;
+  
+
 }
 
 

@@ -10,7 +10,7 @@ export const userFromCookie =async () :Promise<User>=>{
     console.log("token we got from cookie "+token);
    let tempUser:any =await getUserFromToken(token);
     let user:User = new User();
-    user.id = tempUser.id;
+    user.id = tempUser._id;
     user.username = tempUser.username;
     user.email = tempUser.email;
     user.password = tempUser.password;

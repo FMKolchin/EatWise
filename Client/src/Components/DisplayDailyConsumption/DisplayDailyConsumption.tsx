@@ -10,6 +10,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { User } from '../../Models/User';
+import { Box, Card } from '@mui/material';
 
 
 ChartJS.register(
@@ -92,5 +93,10 @@ export function DisplayDailyConsumption(props:any) {
       declareDatafromUser(props.user);
     },[data,props.user]);
   
-  return <Bar id="bar-chart" height={300} width={500} options={options} data={stateData} />;
+  return (
+  <Box sx={{ minWidth: 275 }}>
+  <Card  variant="outlined">
+  <Bar id="bar-chart" height={300} width={500} options={options} data={stateData} />
+  </Card></Box>
+)
 }

@@ -3,14 +3,16 @@ import { all, fork } from "redux-saga/effects";
 import WatchOnGetUsers from "./userSlice/saga/getUser";
 import WatchOnInitUser from "./userSlice/saga/initUser";
 import WatchOnAddToDailyConsomption from "./userSlice/saga/addToDailyConsomption";
+import WatchOnUpdateDays from "./userSlice/saga/updateDays";
 
 
-export default function* root(){
+export default function* root() {
     yield all(
         [
-            ,fork(WatchOnGetUsers),
-             fork(WatchOnInitUser),
-             fork(WatchOnAddToDailyConsomption),
+            fork(WatchOnGetUsers),
+            fork(WatchOnInitUser),
+            fork(WatchOnAddToDailyConsomption),
+            fork(WatchOnUpdateDays),
         ]
     )
 }

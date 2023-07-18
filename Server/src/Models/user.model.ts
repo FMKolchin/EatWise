@@ -15,6 +15,8 @@ class User {
     averageConsumption?:string ="";
     weeklyConsumption:string = "";
     daysUpdated:number = 0;
+    lastUpdate:string = "";
+    // administration:boolean = false;
 
 
 }
@@ -34,6 +36,9 @@ const userSchema = new mongoose.Schema<User>({
   averageConsumption:{ type: String },//points to nutrition model.
   weeklyConsumption:{ type: String }, //points to week model.
   daysUpdated:{ type: Number},
+  lastUpdate:{type: String},
+  // administration:{type:Boolean},
+
 });
 
 const UserModel = mongoose.model<User>("Users", userSchema);

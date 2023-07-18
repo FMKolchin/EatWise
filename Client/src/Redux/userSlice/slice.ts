@@ -26,7 +26,14 @@ const slice=createSlice({
         },
         onAddToDailyConsomptionSuccess:(state,action)=>{
             state.user = action.payload;
+        },
+        onUpdateDaysReqest:(state,action)=>{
+
+        },
+        onUpdateDaysSuccess:(state,action)=>{
+            state.user = action.payload;
         }
+
     }
 })
 
@@ -40,7 +47,7 @@ export const selectors={
 
 }
 
-export const actions =  {...slice.actions};
+export const actions:any =  {...slice.actions};
 
 
 export default slice.reducer;

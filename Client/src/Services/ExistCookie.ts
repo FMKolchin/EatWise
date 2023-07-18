@@ -20,3 +20,10 @@ export  const ExistCookie = () =>{
   
 
 }
+
+export const  deleteCookie=()=>{
+  if(ExistCookie()){
+    Cookies.remove('jwt');
+  }
+      
+}

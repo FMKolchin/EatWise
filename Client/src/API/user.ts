@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import config from '../config';
 import { Nutrition } from '../Models/Nutrition';
 import Cookies from 'js-cookie';
+import { User } from '../Models/User';
 
 
 export const loginUser = async (username : string, password : string):Promise<string|null> =>{
@@ -58,5 +59,10 @@ export const SavePersonalDetails = async (age:number,weight:number,height:number
     console.log("begin api function save personal details age:"+age+" weight "+weight+" height "+height," token "+Cookies.get().jwt);
     await axios.post(`${config.api}/user/savePersonalDetails`,{age:age,weight:weight,height:height,sportLevel:sportLevel,gender:gender,recommendedConsumption:recommendedConsumption,token:Cookies.get().jwt});
     console.log("finish api function save personal details");
+}
+
+export const updateDays=async (user:string):Promise<User>=>{
+    console.log("user before api "+user);
+   return await axios.post(`${config.api}/user/updateDays`,{user:user});
 }
 
