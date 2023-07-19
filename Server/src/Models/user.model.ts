@@ -16,7 +16,7 @@ class User {
     weeklyConsumption:string = "";
     daysUpdated:number = 0;
     lastUpdate:string = "";
-    // administration:boolean = false;
+    administration:boolean = false;
 
 
 }
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema<User>({
   weeklyConsumption:{ type: String }, //points to week model.
   daysUpdated:{ type: Number},
   lastUpdate:{type: String},
-  // administration:{type:Boolean},
+  administration:{type:Boolean},
 
 });
 

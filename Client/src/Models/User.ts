@@ -16,7 +16,7 @@ export class User{
     weeklyConsumption:Nutrition[] = [];
     daysUpdated:number = 0;
     lastUpdate?: string;
-    // administration:boolean = false;
+    administration:boolean = false;
     
 
     

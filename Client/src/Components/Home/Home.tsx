@@ -34,6 +34,9 @@ export const Home = () => {
                 // let u:User = await userFromCookie();
                 // console.log(u);
                 dispatch(actions.onInitUserRequest());
+                if(user.administration){
+                    navigate('/message',{replace: true});
+                }
                 // const user = useSelector(selectors.getUser);
                 console.log("redux user " + user);
             }
