@@ -80,7 +80,7 @@ const setLables = ()=>{
 }
 
 const getDaysNumbers = ()=>{
-  let day:number =new Date().getDay();
+  let day:number =new Date().getDay()+1;
   let i:number = 6;
   return [(day-(i--)+7)%7,(day-(i--)+7)%7,(day-(i--)+7)%7,(day-(i--)+7)%7,(day-(i--)+7)%7,(day-(i--)+7)%7,day];
 }

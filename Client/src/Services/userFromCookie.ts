@@ -23,14 +23,25 @@ export const userFromCookie =async () :Promise<User>=>{
     user.averageConsumption = await nutritionById(tempUser.averageConsumption)??new Nutrition("",0,0,0,0,0,0,0);
     user.dailyConsumption =await nutritionById( tempUser.dailyConsumption)??new Nutrition("",0,0,0,0,0,0,0);
     user.recommendedConsumption =await nutritionById( tempUser.recommendedConsumption)??new Nutrition("",0,0,0,0,0,0,0);
+    user.weeklyConsumption = [];
+    for (let i = 0; i < 7; i++) {
+        let nutValueByDay:Nutrition
+        try{
+           nutValueByDay = await nutritionById(tempUser.weeklyConsumption[i])?? new Nutrition("",0,0,0,0,0,0,0);   
+        }
+        catch{
+            nutValueByDay = new Nutrition("",0,0,0,0,0,0,0);  
+        }
+      
+        user.weeklyConsumption.push(nutValueByDay);
+        
+    }
     }
     catch{
         console.log("error in updateing user Consumption...");
     }
 
     user.daysUpdated = tempUser.daysUpdated;
-    user.weeklyConsumption = [new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0)];
-    // await nutritionById( tempUser.weeklyConsumption);
     user.lastUpdate = tempUser.lastUpdate;
     console.log("in userFromCookie::::: "+JSON.stringify(user));
     return user;

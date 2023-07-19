@@ -13,7 +13,6 @@ export const FoodOption = (props: any) => {
 
 
   const handleListItemClick = (
-
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
   ) => {

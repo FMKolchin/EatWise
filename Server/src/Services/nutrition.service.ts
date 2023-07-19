@@ -22,10 +22,11 @@ export const updateNutrition = async (nut:Nutrition): Promise<void>=>{
 }
 
 export const addNutValues = async (nutId:string,nutValues:Nutrition):Promise<void>=>{
+    
     console.log("in start addNutValues nut "+JSON.stringify(nutValues)+" , "+nutId);
     let nut:Nutrition|null = await getNutritionById(nutId);
     if(nut){
-        console.log("if nut exists "+JSON.stringify(nut));
+      console.log("if nut exists "+JSON.stringify(nut));
       nut.calories +=nutValues.calories; 
       nut.carbohydrates +=nutValues.carbohydrates;
       nut.cholesterol +=nutValues.cholesterol;
