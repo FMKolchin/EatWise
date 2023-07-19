@@ -8,7 +8,7 @@ export const ChangeRegisterPersonalD = () =>{
     const openSettingsPage = ()=>{
       navigate('/RegisterPersonalDetails',{replace:true});
     }
-
+    
     return (
         <IconButton
         size="large"

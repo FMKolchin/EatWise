@@ -7,10 +7,14 @@ import { Nutrition } from "../../Models/Nutrition";
 import {recommendedCalories,activityFactor,recommendedCarbohydrates,
 recommendedCholesterol,recommendedFiber,recommendedSodium,recommendedProtein,
 recommendedSugar,recommendedTotalFat} from "../../Services/calculatePersonalDetails";
+import { selectors } from "../../Redux/userSlice/slice";
+import { User } from "../../Models/User";
+import { useSelector } from "react-redux";
 
 
 
 export const  RegisterPersonalDetails = ()=>{
+  const user: User = useSelector(selectors.getUser);   
     const [age,setAge] = useState<number>(0);
     const [weight,setWeight] = useState<number>(0);
     const [height,setHeight] = useState<number>(0);
@@ -48,11 +52,12 @@ export const  RegisterPersonalDetails = ()=>{
     return(
         <div>
             <form action="">
-            <TextField id="age" label="גיל" required variant="standard" value={age} onChange={e=>{setAge(Number(e.target.value))}} type="number" InputProps={{ inputProps: { min: 0} }}/>
+              {/* <h1>{user.age}</h1> */}
+            <TextField id="age" label="גיל" required variant="standard" value={user.age} onChange={e=>{setAge(Number(e.target.value))}} placeholder={String(user.age)} type="number" InputProps={{ inputProps: { min: 0} }}/>
             <br/>
-            <TextField id="weight" label="משקל" required variant="standard" value={weight} onChange={e=>{setWeight(Number(e.target.value))}} type="number" InputProps={{ inputProps: { min: 0 } }}/>
+            <TextField id="weight" label="משקל" required variant="standard" value={user.weight} onChange={e=>{setWeight(Number(e.target.value))}} type="number" InputProps={{ inputProps: { min: 0 } }}/>
             <br/>
-            <TextField id="height" label="גובה" required variant="standard" value={height} onChange={e=>{setHeight(Number(e.target.value))}}  type="number" InputProps={{ inputProps: { min: 0 } }}/>
+            <TextField id="height" label="גובה" required variant="standard" value={user.height} onChange={e=>{setHeight(Number(e.target.value))}}  type="number" InputProps={{ inputProps: { min: 0 } }}/>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-standard-label">רמת כושר</InputLabel>
         <Select
