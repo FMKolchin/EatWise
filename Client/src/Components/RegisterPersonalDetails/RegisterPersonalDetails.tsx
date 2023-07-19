@@ -90,8 +90,6 @@ export const  RegisterPersonalDetails = ()=>{
             <Button variant="outlined" onClick={savePersonalDetailsFunc} endIcon={<SaveAsIcon />}>
   שמור...
 </Button>
-
-            
             </form>
         </div>
     )
