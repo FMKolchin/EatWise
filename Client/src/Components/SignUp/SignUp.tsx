@@ -7,7 +7,7 @@ export const SignUp = (): JSX.Element => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [validPassword, setValidPassword] = useState<string>("");
-
+  
   useEffect(()=>{
     //check if password is equal and alert user if not
     for (let index = 0; index < validPassword.length; index++) {

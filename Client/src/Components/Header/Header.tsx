@@ -4,6 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { Disconnect } from '../Disconnect/Disconnect';
 import { Settings } from '../Settings/Settings';
 
+
 export default function Header() {
 
   return (
@@ -17,6 +18,7 @@ export default function Header() {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Disconnect></Disconnect>
           </Box>
+          
         
         </Toolbar>
       </AppBar>

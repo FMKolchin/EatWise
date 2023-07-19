@@ -6,7 +6,7 @@ export const Settings = () =>{
     const navigate = useNavigate();
 
     const openSettingsPage = ()=>{
-      
+      navigate('/changeDetails',{replace:true});
     }
 
     return (
