@@ -65,4 +65,33 @@ export const updateDays=async (user:string):Promise<User>=>{
     console.log("user before api "+user);
    return await axios.post(`${config.api}/user/updateDays`,{user:user});
 }
+export const changeDetails=async(username : string,email: string, password : string)=>{
+    console.log("start userApi changeDetails")
+    // debugger;
+    let data:AxiosResponse|null = null;
+    let res :string|null = null;
+    try {
+        console.log("in try api")
+        data =await axios.post(`${config.api}/user/changeDetails`, {username: username,email: email, password: password,token:Cookies.get().jwt});
+        if(data?.status &&(data?.status >299 || data?.status < 200)){
+            console.log("not valid status, return error "+data?.status);
+            throw new Error("error inserting");
+        }
+   
+    
+
+    } catch (error:any) {
+        console.log("in catch user api "+error.message);
+        if(error.response && error.response.status === 400){
+            console.log("ERROR: my error user api "+error);
+        }
+        else{
+            console.log("ERROR:not my error user api "+error);
+             //alert("ERROR: " + error.response.message);
+        }
+        throw error;
+    }
+        console.log("result of userApi: "+res)
+        return res;
+}
 

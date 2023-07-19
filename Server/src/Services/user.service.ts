@@ -53,6 +53,7 @@ import { codeJWT, decodeJWT } from "./token.service";
 const updateUserPersonalDetails = async (userId: string, age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: string, dailyConsumption: string) => {
   let fullUser: User | null = await getUserById(userId);
   if (fullUser) {
+  
     fullUser.age = age;
     fullUser.weight = weight;
     fullUser.height = height;
@@ -64,6 +65,7 @@ const updateUserPersonalDetails = async (userId: string, age: number, weight: nu
   }
 
 }
+
  export const savePersonalDetails = async (age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: Nutrition, token: string): Promise<void> => {
   //save recommeded Consumption to nutrition table db
   try {
@@ -105,6 +107,43 @@ export const updateDays = async (userID:string):Promise<User|null> => {
   
 
 }
+const ChangeDetails = async (userId: string,username:string,password:string,email:string) => {
+  let fullUser: User | null = await getUserById(userId);
+  if (fullUser) {
+    if(username==="")
+    {   
+      fullUser.username = fullUser.username;
+    }
+    else
+    {
+      fullUser.username=username;
+    }
+    if(fullUser.email==="")
+    {
+    fullUser.email = fullUser.email;
+    }
+    if(email!=""){
+      fullUser.email=email;
+    }
+    fullUser.password = password;
+
+    fullUser.age = fullUser.age;
+    fullUser.weight =fullUser.weight;
+    fullUser.height = fullUser.height;
+    fullUser.gender = fullUser.gender;
+    fullUser.sportLevel = fullUser.sportLevel;
+    fullUser.recommendedConsumption = fullUser.recommendedConsumption;
+    fullUser.dailyConsumption = fullUser.dailyConsumption;
+    await updateUser(fullUser);
+  }
+
+}
+export const changeDetails = async (username: string, password: string, email: string, token: string) => {
+  console.log("in user.service changeDetails")
+  let userId: string = (await decodeJWT(token))._id;
+  await ChangeDetails(userId, username,password,email);
+}
+
 
 
 
