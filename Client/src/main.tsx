@@ -11,7 +11,7 @@ import {Fallback} from './Components/Fallback/Fallback';
 import { RegisterPersonalDetails } from './Components/RegisterPersonalDetails/RegisterPersonalDetails';
 import configStoreFunction from './Redux/configStore';
 import { Provider } from 'react-redux';
-
+import { ChangeDetails } from './Components/Settings/ChangeDetails';
 
 interface Route {
   path: string;
@@ -38,7 +38,14 @@ const routes: Route[] = [
   {
     path:'/registerPersonalDetails',
     Component: RegisterPersonalDetails
-  }
+  },
+  {
+    path:'/changeDetails',
+    Component: ChangeDetails
+  },
+
+
+
 ];
 
 const router = createBrowserRouter(routes);

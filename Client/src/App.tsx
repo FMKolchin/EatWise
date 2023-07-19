@@ -1,4 +1,5 @@
 import './App.css'
+import Header from './Components/Header/Header'
 import { Home } from './Components/Home/Home'
 
 
@@ -6,7 +7,7 @@ import { Home } from './Components/Home/Home'
 function App() {
 
   return (
-     <Home></Home>
+    <><Header></Header><Home></Home></>
    
   )
 }
