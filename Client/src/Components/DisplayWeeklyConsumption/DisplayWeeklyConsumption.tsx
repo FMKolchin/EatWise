@@ -10,6 +10,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import { DaysOfWeek } from '../../Models/DaysOfWeek';
+import { Nutrition } from '../../Models/Nutrition';
 
 
 ChartJS.register(
@@ -36,26 +38,90 @@ export const options = {
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels:string[] = [];
 
 export const data = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
-      data: [1,2,2,3,4,5,6,7,8,9,10,11],
+      label: 'חלבונים',
+      data: [0],
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
     },
     {
-      label: 'Dataset 2',
-      data: [90,89,87,86,85,84,34,23],
+      label: 'סוכרים',
+      data: [0],
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    },
+    {
+      label: 'שומנים',
+      data: [0],
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    },
+    {
+      label: 'פחמימות',
+      data: [0],
       borderColor: 'rgb(53, 162, 235)',
       backgroundColor: 'rgba(53, 162, 235, 0.5)',
     },
   ],
 };
 
-export function DisplayWeeklyConsumption() {
+const setLables = ()=>{
+ let days:number[] = getDaysNumbers();
+  let lables:string[] = [];
+  for (let i = 0; i <7; i++) {
+      lables.push(DaysOfWeek[days[i]]);
+  }
+  return lables;
+}
+
+const getDaysNumbers = ()=>{
+  let day:number =new Date().getDay();
+  let i:number = 6;
+  return [(day-(i--)+7)%7,(day-(i--)+7)%7,(day-(i--)+7)%7,(day-(i--)+7)%7,(day-(i--)+7)%7,(day-(i--)+7)%7,day];
+}
+
+export function DisplayWeeklyConsumption(props:any) {
+  const weeklyConsumption:Nutrition[] = props.weeklyConsumption;
+  console.log(JSON.stringify(weeklyConsumption));
+  const lables:string[] = setLables();
+  data.labels = lables;
+  let proteins:number[] = [];
+  for (let i  = 0; i < 7; i++){
+    proteins.push(weeklyConsumption[i].proteins);
+   
+  }
+  console.log(JSON.stringify(proteins));
+  data.datasets[0].data = proteins;
+
+  let sugars:number[] = [];
+  for (let i  = 0; i < 7; i++){
+    sugars.push(weeklyConsumption[i].sugars);
+   
+  }
+  data.datasets[1].data = sugars;
+
+  let fats:number[] = [];
+  for (let i  = 0; i < 7; i++){
+    fats.push(weeklyConsumption[i].totalFat);
+   
+  }
+  data.datasets[2].data = fats;
+
+  let carbohydrates:number[] = [];
+  for (let i  = 0; i < 7; i++){
+    carbohydrates.push(weeklyConsumption[i].carbohydrates);
+   
+  }
+  data.datasets[3].data = carbohydrates;
+
+  
+  
+
+
   return <Line  options={options} data={data}/>
 }

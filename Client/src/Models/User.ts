@@ -13,7 +13,7 @@ export class User{
     dailyConsumption?:Nutrition | undefined= new Nutrition("",0,0,0,0,0,0,0);
     recommendedConsumption?:Nutrition |undefined= new Nutrition("",0,0,0,0,0,0,0);
     averageConsumption?:Nutrition |undefined= new Nutrition("",0,0,0,0,0,0,0);
-    weeklyConsumption:Nutrition[] = [];
+    weeklyConsumption:Nutrition[] = [new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),];
     daysUpdated:number = 0;
     lastUpdate?: string;
     administration:boolean = false;

@@ -29,7 +29,7 @@ export const userFromCookie =async () :Promise<User>=>{
     }
 
     user.daysUpdated = tempUser.daysUpdated;
-    user.weeklyConsumption = [];
+    user.weeklyConsumption = [new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0)];
     // await nutritionById( tempUser.weeklyConsumption);
     user.lastUpdate = tempUser.lastUpdate;
     console.log("in userFromCookie::::: "+JSON.stringify(user));

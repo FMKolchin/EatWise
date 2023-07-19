@@ -9,6 +9,7 @@ import Header from "../Header/Header";
 import { Grid } from "@mui/material";
 import DisplayDailyWater from "../DisplayDailyWater/DisplayDailyWater";
 import { DisplayWeeklyConsumption } from "../DisplayWeeklyConsumption/DisplayWeeklyConsumption";
+import { User } from "../../Models/User";
 
 
 
@@ -16,7 +17,7 @@ import { DisplayWeeklyConsumption } from "../DisplayWeeklyConsumption/DisplayWee
 export const Home = () => {
     const navigate: NavigateFunction = useNavigate();
     const userRedux = useSelector(selectors.getUser);
-    const [user, setUser] = useState(userRedux);
+    const [user, setUser] = useState<User>(userRedux);
     console.log(JSON.stringify(user) + " user from toolkit");
     const dispatch = useDispatch();
     // let user:User = new User();
@@ -66,7 +67,7 @@ export const Home = () => {
                         </Grid>
                     </Grid>
                    
-                    <DisplayWeeklyConsumption></DisplayWeeklyConsumption>
+                    <DisplayWeeklyConsumption weeklyConsumption={user.weeklyConsumption}></DisplayWeeklyConsumption>
                 </Grid>
                 <Grid item>
                     <AddFood />
