@@ -33,23 +33,6 @@ export const anyToUser = async (tempUser: any): Promise<User> => {
 
         }
     user.recommendedWater=tempUser.recommendedWater
-    try{
-    user.averageConsumption = await nutritionById(tempUser.averageConsumption)??new Nutrition("",0,0,0,0,0,0,0);
-    user.dailyConsumption =await nutritionById( tempUser.dailyConsumption)??new Nutrition("",0,0,0,0,0,0,0);
-    user.recommendedConsumption =await nutritionById( tempUser.recommendedConsumption)??new Nutrition("",0,0,0,0,0,0,0);
-    user.weeklyConsumption = [];
-    for (let i = 0; i < 7; i++) {
-        let nutValueByDay:Nutrition
-        try{
-           nutValueByDay = await nutritionById(tempUser.weeklyConsumption[i])?? new Nutrition("",0,0,0,0,0,0,0);   
-        }
-        catch{
-            nutValueByDay = new Nutrition("",0,0,0,0,0,0,0);  
-        }
-      
-        user.weeklyConsumption.push(nutValueByDay);
-        
-    }
     }
     catch {
         console.log("error in updateing user Consumption...");
@@ -58,7 +41,7 @@ export const anyToUser = async (tempUser: any): Promise<User> => {
     user.daysUpdated = tempUser.daysUpdated;
     user.lastUpdate = tempUser.lastUpdate;
     return user;
-}
+
 }
 export const userFromCookie = async (): Promise<User> => {
     const token: string = Cookies.get()['jwt'];

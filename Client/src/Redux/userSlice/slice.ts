@@ -38,8 +38,8 @@ const slice=createSlice({
         },
         onAddFoodOptionSuccess:(state,action)=>{
             state.user= action.payload;
-        }
         },
+        
         onAddToDailyWaterRequest:(state,action)=>{
 
         },
