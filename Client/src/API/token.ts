@@ -12,6 +12,6 @@ export const validateJWT = async(token: string):Promise<boolean> =>{
 export const getUserFromToken = async(token: string): Promise<any> =>{
   console.log("in token api client get user from token");
   let user:any = (await axios.post(`${config.api}/token/user-from-token`,{token:token})).data;
-  console.log("user after fetch: " + JSON.stringify(user));
+  // console.log("user after fetch: " + JSON.stringify(user));
   return user;
 }

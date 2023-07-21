@@ -20,8 +20,6 @@ export const Home = () => {
     const [user, setUser] = useState<User>(userRedux);
     console.log(JSON.stringify(user) + " user from toolkit");
     const dispatch = useDispatch();
-    // let user:User = new User();
-    // const [user,setUser] = useState<User>(new User());
 
     useEffect(() => {
         const checkValid = async () => {
@@ -53,7 +51,7 @@ export const Home = () => {
 
     return (
         <div>
-            <Header></Header>
+           <Header></Header>
             <br />
             <br />
             <Grid container>
@@ -63,7 +61,7 @@ export const Home = () => {
                             <DisplayDailyConsumption user={user}></DisplayDailyConsumption>
                         </Grid>
                         <Grid item>
-                            <DisplayDailyWater />
+                            <DisplayDailyWater user={user}></DisplayDailyWater>
                         </Grid>
                     </Grid>
                    

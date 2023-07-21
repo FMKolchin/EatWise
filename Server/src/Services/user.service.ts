@@ -6,6 +6,7 @@ import { createNutrition } from "./nutrition.service";
 const connectDB = require('../ConnectDB');
 const objectId = require("mongodb").ObjectId;
 import { codeJWT, decodeJWT } from "./token.service";
+import { Console } from "console";
 
 
  export const login = async (username: string, password: string): Promise<string> => {
@@ -44,15 +45,15 @@ import { codeJWT, decodeJWT } from "./token.service";
 }
 
  const updateUser = async (user: User): Promise<void> => {
+  console.log("in updateUser")
   console.log("((((((((((((((((((((((((((((((((((((((((((((((");
   await UserModel.replaceOne({ _id: user._id }, user);
-  console.log(`Updated `+user );
+  // console.log(`Updated `+user );
 }
 
-const updateUserPersonalDetails = async (userId: string, age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: string, dailyConsumption: string) => {
+const updateUserPersonalDetails = async (userId: string, water:number,age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: string, dailyConsumption: string) => {
   let fullUser: User | null = await getUserById(userId);
   if (fullUser) {
-  
     fullUser.age = age;
     fullUser.weight = weight;
     fullUser.height = height;
@@ -60,12 +61,14 @@ const updateUserPersonalDetails = async (userId: string, age: number, weight: nu
     fullUser.sportLevel = sportLevel;
     fullUser.recommendedConsumption = recommendedConsumption;
     fullUser.dailyConsumption = dailyConsumption;
+    fullUser.recommendedWater=water;
+    fullUser.dailyWater=0;
     await updateUser(fullUser);
   }
 
 }
 
- export const savePersonalDetails = async (age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: Nutrition, token: string): Promise<void> => {
+ export const savePersonalDetails = async (water:number,age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: Nutrition, token: string): Promise<void> => {
   //save recommeded Consumption to nutrition table db
   try {
     let dailyConsumption: Nutrition = new Nutrition();
@@ -74,7 +77,7 @@ const updateUserPersonalDetails = async (userId: string, age: number, weight: nu
     dailyConsumption = await createNutrition(dailyConsumption);
     recommendedConsumption = await createNutrition(recommendedConsumption);
     let userId: string = (await decodeJWT(token))._id;
-    await updateUserPersonalDetails(userId, age, weight, height, sportLevel, gender, recommendedConsumption._id, dailyConsumption._id);
+    await updateUserPersonalDetails(userId,water, age, weight, height, sportLevel, gender, recommendedConsumption._id, dailyConsumption._id);
   }
   catch (error: any) {
     console.log("error in savePersonal Details " + error.message);
@@ -84,12 +87,12 @@ const updateUserPersonalDetails = async (userId: string, age: number, weight: nu
 export const updateDays = async (userID:string):Promise<User|null> => {
   let fullDate:Date = new Date();
   let date:Date = new Date(fullDate.getFullYear(), fullDate.getMonth(), fullDate.getDate());
-  console.log(date);
+  // console.log(date);
   let user:User|null = await getUserById(userID);
   if(user){
     if(date.toString()!=user.lastUpdate){
     user.lastUpdate = date.toString();
-    console.log(user);
+    // console.log(user);
     if(!user.daysUpdated){
       user.daysUpdated = 1;
     }
@@ -97,7 +100,7 @@ export const updateDays = async (userID:string):Promise<User|null> => {
       user.daysUpdated++;
     }
     await updateUser(user);
-    console.log("user "+user);
+    // console.log("user "+user);
     return user;
   }
   }
@@ -137,11 +140,40 @@ const ChangeDetails = async (userId: string,username:string,password:string,emai
   }
 
 }
+const updateWater = async (userId: string,water:number) => {
+  console.log("before update in user.service addWater")
+  let fullUser: User | null = await getUserById(userId);
+  console.log(userId)
+  if (fullUser) {
+    console.log("in if updateWater")
+    fullUser.username=fullUser.username
+    fullUser.email=fullUser.email
+    fullUser.password = fullUser.password;
+    fullUser.age = fullUser.age;
+    fullUser.weight =fullUser.weight;
+    fullUser.height = fullUser.height;
+    fullUser.gender = fullUser.gender;
+    fullUser.sportLevel = fullUser.sportLevel;
+    fullUser.recommendedConsumption = fullUser.recommendedConsumption;
+    fullUser.dailyConsumption = fullUser.dailyConsumption;
+    fullUser.dailyWater=water+120;
+    console.log("after update in user.service addWater")
+    await updateUser(fullUser);
+  }
+
+}
 export const changeDetails = async (username: string, password: string, email: string, token: string) => {
   console.log("in user.service changeDetails")
   let userId: string = (await decodeJWT(token))._id;
   await ChangeDetails(userId, username,password,email);
 }
+export const addWater = async (water:number, userId:string) => {
+  console.log("in user.service addWater")
+   await updateWater(userId,water);
+   console.log("in user.service after addWater")
+}
+
+
 
 export const increase1DaysUpdate = async (userId:string)=>{
   let user:User|null = await getUserById(userId);

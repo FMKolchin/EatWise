@@ -17,8 +17,8 @@ class User {
     daysUpdated:number = 0;
     lastUpdate:string = "";
     administration:boolean = false;
-
-
+    recommendedWater:number=0;
+    dailyWater:number=0;
 }
 
 const userSchema = new mongoose.Schema<User>({
@@ -38,6 +38,8 @@ const userSchema = new mongoose.Schema<User>({
   daysUpdated:{ type: Number},
   lastUpdate:{type: String},
   administration:{type:Boolean},
+  recommendedWater:{type:Number},
+  dailyWater:{type:Number}
 
 });
 

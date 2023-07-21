@@ -5,6 +5,7 @@ import WatchOnInitUser from "./userSlice/saga/initUser";
 import WatchOnAddToDailyConsomption from "./userSlice/saga/addToDailyConsomption";
 import WatchOnUpdateDays from "./userSlice/saga/updateDays";
 import WatchOnAddFoodOption from "./userSlice/saga/addFoodOption";
+import WatchOnAddToDailyWater from "./userSlice/saga/addToDailyWater";
 
 
 export default function* root() {
@@ -14,6 +15,7 @@ export default function* root() {
             fork(WatchOnInitUser),
             fork(WatchOnAddToDailyConsomption),
             fork(WatchOnUpdateDays),
+            fork(WatchOnAddToDailyWater),
             fork(WatchOnAddFoodOption),
         ]
     )

@@ -6,7 +6,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { Nutrition } from "../../Models/Nutrition";
 import {recommendedCalories,activityFactor,recommendedCarbohydrates,
 recommendedCholesterol,recommendedFiber,recommendedSodium,recommendedProtein,
-recommendedSugar,recommendedTotalFat} from "../../Services/calculatePersonalDetails";
+recommendedSugar,recommendedTotalFat, recocommendedWater} from "../../Services/calculatePersonalDetails";
 import { selectors } from "../../Redux/userSlice/slice";
 import { User } from "../../Models/User";
 import { useSelector } from "react-redux";
@@ -16,9 +16,9 @@ import Header from "../Header/Header";
 
 export const  RegisterPersonalDetails = ()=>{
   const user: User = useSelector(selectors.getUser);   
-    const [age,setAge] = useState<number>(0);
-    const [weight,setWeight] = useState<number>(0);
-    const [height,setHeight] = useState<number>(0);
+    const [age,setAge] = useState<number>(user.age);
+    const [weight,setWeight] = useState<number>(user.weight);
+    const [height,setHeight] = useState<number>(user.height);
     const [sportLevel,setSportLevel] = useState<number>(0);
     const [gender,setGender] = useState<number>(0);
     const navigate:NavigateFunction = useNavigate();
@@ -28,8 +28,9 @@ export const  RegisterPersonalDetails = ()=>{
     const savePersonalDetailsFunc = async() =>{
         try {
             console.log("before api function register personal details");
+            let water:number=recocommendedWater(age,weight,sportLevel,gender)
             let recommendedConsumption:Nutrition = calculateRecommendedConsumption();
-            await SavePersonalDetails(age,weight,height,sportLevel,gender,recommendedConsumption);
+            await SavePersonalDetails(water,age,weight,height,sportLevel,gender,recommendedConsumption);
             console.log("after api function register personal details");
             navigate('/home',{replace:true});
         } catch (error:any) {
@@ -52,13 +53,14 @@ export const  RegisterPersonalDetails = ()=>{
 
     return(
         <div>
+          {/* <Header></Header> */}
             <form action="">
               {/* <h1>{user.age}</h1> */}
-            <TextField id="age" label="גיל" required variant="standard" value={user.age} onChange={e=>{setAge(Number(e.target.value))}} placeholder={String(user.age)} type="number" InputProps={{ inputProps: { min: 0} }}/>
+            <TextField id="age" label="גיל" required variant="standard" value={age} onChange={e=>{setAge(Number(e.target.value))}} placeholder={String(user.age)} type="number" InputProps={{ inputProps: { min: 0} }}/>
             <br/>
-            <TextField id="weight" label="משקל" required variant="standard" value={user.weight} onChange={e=>{setWeight(Number(e.target.value))}} type="number" InputProps={{ inputProps: { min: 0 } }}/>
+            <TextField id="weight" label="משקל" required variant="standard" value={weight} onChange={e=>{setWeight(Number(e.target.value))}} type="number" InputProps={{ inputProps: { min: 0 } }}/>
             <br/>
-            <TextField id="height" label="גובה" required variant="standard" value={user.height} onChange={e=>{setHeight(Number(e.target.value))}}  type="number" InputProps={{ inputProps: { min: 0 } }}/>
+            <TextField id="height" label="גובה" required variant="standard" value={height} onChange={e=>{setHeight(Number(e.target.value))}}  type="number" InputProps={{ inputProps: { min: 0 } }}/>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-standard-label">רמת כושר</InputLabel>
         <Select

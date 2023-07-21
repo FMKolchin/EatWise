@@ -11,7 +11,7 @@ import {Fallback} from './Components/Fallback/Fallback';
 import { RegisterPersonalDetails } from './Components/RegisterPersonalDetails/RegisterPersonalDetails';
 import configStoreFunction from './Redux/configStore';
 import { Provider } from 'react-redux';
-import { ChangeDetails } from './Components/Settings/ChangeAcountDetails';
+import { ChangeAccountDetails } from './Components/Settings/ChangeAcountDetails';
 import { Settings } from './Components/Settings/Settings';
 
 interface Route {
@@ -42,12 +42,13 @@ const routes: Route[] = [
   },
   {
     path:'/changeAccountDetails',
-    Component: ChangeDetails
+    Component: ChangeAccountDetails
   },
   {
     path:'/setting',
     Component:Settings,
   },
+
 
 
 
