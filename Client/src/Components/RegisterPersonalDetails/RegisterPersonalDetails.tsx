@@ -10,6 +10,7 @@ recommendedSugar,recommendedTotalFat} from "../../Services/calculatePersonalDeta
 import { selectors } from "../../Redux/userSlice/slice";
 import { User } from "../../Models/User";
 import { useSelector } from "react-redux";
+import Header from "../Header/Header";
 
 
 

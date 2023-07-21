@@ -17,8 +17,9 @@ export const FoodOption = (props: any) => {
     index: number,
   ) => {
     console.log("before click dispatch");
-    dispatch(actions.onAddToDailyConsomptionRequest({ user: user, nutrition: food.productValues }));
-    dispatch(actions.onUpdateDaysReqest({ user: user.id }));
+    // dispatch(actions.onAddToDailyConsomptionRequest({ user: user, nutrition: food.productValues }));
+    // dispatch(actions.onUpdateDaysReqest({ user: user.id }));
+    dispatch(actions.onAddFoodOptionRequest({ user:user,nut:food.productValues}));
     //do what you need to add food details to what eaten
   };
 

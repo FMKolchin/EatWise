@@ -1,5 +1,7 @@
 import { ClientError, NotFoundError } from "../Models/Error";
 import { Nutrition, NutritionModel } from "../Models/nutrition.model";
+import { User } from "../Models/user.model";
+import { getDateInString, getLastUpdate, getUserById, increase1DaysUpdate, saveDayNutValuesToWeeklyConsomption, updateLastUpdatedDate } from "./user.service";
 //don't delete, needed for DB connection
 const connectDB = require('../ConnectDB');
 const objectId = require("mongodb").ObjectId;
@@ -43,6 +45,23 @@ export const addNutValues = async (nutId:string,nutValues:Nutrition):Promise<voi
 
 }
 
+export const addFoodOption = async(nut:Nutrition,userId:string):Promise<User>=>{
+    console.log("enter food option");
+    if(await getLastUpdate(userId)!=getDateInString()){
+        await increase1DaysUpdate(userId);
+        await updateLastUpdatedDate(userId);
+        let nutId:string = new objectId();
+        nut._id = nutId;
+        await createNutrition(nut);
+        await saveDayNutValuesToWeeklyConsomption(userId,nutId);   
+     }
+     else{
+        let user:User = (await getUserById(userId))!;
+        addNutValues(user.dailyConsumption!,nut);
+     }
+     console.log("exit food option");
+     return (await getUserById(userId))!;
+}
 
 
 

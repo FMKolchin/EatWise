@@ -1,6 +1,6 @@
 import  { Request, Response } from 'express';
 import { Nutrition } from '../Models/nutrition.model';
-import { addNutValues, getNutritionById } from '../Services/nutrition.service';
+import { addFoodOption, addNutValues, getNutritionById } from '../Services/nutrition.service';
 
 export const  getNutritionByIdCtrl=  async (req: Request, res: Response) => {
     const nutritionId = req.params.id;
@@ -15,5 +15,10 @@ export const  getNutritionByIdCtrl=  async (req: Request, res: Response) => {
     const nutId = req.body.nutId;
     const nutValues = req.body.nutValues;
     await addNutValues(nutId, nutValues);
+    res.send();
+  }
+
+  export const addFoodOptionCtrl = async (req: Request, res: Response) => {
+    await addFoodOption(req.body.nut,req.body.userId);
     res.send();
   }

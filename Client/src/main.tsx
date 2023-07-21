@@ -11,7 +11,8 @@ import {Fallback} from './Components/Fallback/Fallback';
 import { RegisterPersonalDetails } from './Components/RegisterPersonalDetails/RegisterPersonalDetails';
 import configStoreFunction from './Redux/configStore';
 import { Provider } from 'react-redux';
-import { ChangeDetails } from './Components/Settings/ChangeDetails';
+import { ChangeDetails } from './Components/Settings/ChangeAcountDetails';
+import { Settings } from './Components/Settings/Settings';
 
 interface Route {
   path: string;
@@ -40,8 +41,12 @@ const routes: Route[] = [
     Component: RegisterPersonalDetails
   },
   {
-    path:'/changeDetails',
+    path:'/changeAccountDetails',
     Component: ChangeDetails
+  },
+  {
+    path:'/setting',
+    Component:Settings,
   },
 
 

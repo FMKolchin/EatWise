@@ -32,6 +32,12 @@ const slice=createSlice({
         },
         onUpdateDaysSuccess:(state,action)=>{
             state.user = action.payload;
+        },
+        onAddFoodOptionRequest:(state,action)=>{
+
+        },
+        onAddFoodOptionSuccess:(state,action)=>{
+            state.user= action.payload;
         }
 
     }

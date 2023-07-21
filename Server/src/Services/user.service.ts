@@ -1,5 +1,4 @@
 import { ClientError, NotFoundError } from "../Models/Error";
-import  { Request, Response } from 'express';
 import { Nutrition } from "../Models/nutrition.model";
 import { User, UserModel } from "../Models/user.model";
 import { createNutrition } from "./nutrition.service";
@@ -23,7 +22,7 @@ import { codeJWT, decodeJWT } from "./token.service";
   const foundUsers: User[] = await UserModel.find({ email: email });
   let createdUser: User;
   if (foundUsers.length == 0) {
-    createdUser = await createUser({ _id: _id, username: username, password: password, email: email })
+    createdUser = await createUser({ _id: _id, username: username, password: password, email: email,weeklyConsumpstion:["","","","","","",""], })
     //create & return token
     const token = codeJWT(createdUser.username, createdUser.email, createdUser._id);
     return token;
@@ -142,6 +141,38 @@ export const changeDetails = async (username: string, password: string, email: s
   console.log("in user.service changeDetails")
   let userId: string = (await decodeJWT(token))._id;
   await ChangeDetails(userId, username,password,email);
+}
+
+export const increase1DaysUpdate = async (userId:string)=>{
+  let user:User|null = await getUserById(userId);
+  user!.daysUpdated++;
+  await updateUser(user!);
+}
+
+export const updateLastUpdatedDate = async (userId:string)=>{
+  let user:User|null = await getUserById(userId);
+  user!.lastUpdate = Date.now().toString();
+}
+
+export const getLastUpdate = async (userId:string)=>{
+  let user:User|null = await getUserById(userId);
+  return user!.lastUpdate;
+}
+
+export const saveDayNutValuesToWeeklyConsomption = async (userId:string,nutId:string) =>{
+     let user:User = (await getUserById(userId))!;
+     user.weeklyConsumption[getDayOfWeek()] = nutId;
+     await updateUser(user);
+}
+
+const getDayOfWeek =  ():number =>{
+  return new Date().getDay();
+}
+
+export const getDateInString = ():string =>{
+  let fullDate:Date = new Date();
+  let date:Date = new Date(fullDate.getFullYear(), fullDate.getMonth(), fullDate.getDate());
+  return date.toString();
 }
 
 

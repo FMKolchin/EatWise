@@ -2,8 +2,9 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { Disconnect } from '../Disconnect/Disconnect';
-import { Settings } from '../Settings/Settings';
-import { ChangeRegisterPersonalD } from '../Settings/ChangeRegisterPersonalD';
+import { SettingsButton } from '../Settings/SettingsButton';
+import { Button } from '@mui/material';
+
 
 
 export default function Header() {
@@ -14,10 +15,10 @@ export default function Header() {
         <Toolbar>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Settings></Settings>
+            <SettingsButton></SettingsButton>
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <ChangeRegisterPersonalD></ChangeRegisterPersonalD>
+            <Button>home</Button>
           </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Disconnect></Disconnect>

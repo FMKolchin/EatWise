@@ -13,7 +13,7 @@ class User {
     dailyConsumption?:string="";
     recommendedConsumption?:string="";
     averageConsumption?:string ="";
-    weeklyConsumption:string = "";
+    weeklyConsumption:Array<string> = ["","","","","","",""];
     daysUpdated:number = 0;
     lastUpdate:string = "";
     administration:boolean = false;
@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema<User>({
   dailyConsumption:{ type: String},//points to nutrition model.
   recommendedConsumption:{ type: String},//points to nutrition model.
   averageConsumption:{ type: String },//points to nutrition model.
-  weeklyConsumption:{ type: String }, //points to week model.
+  weeklyConsumption:{ type: [] }, //points to week model.
   daysUpdated:{ type: Number},
   lastUpdate:{type: String},
   administration:{type:Boolean},

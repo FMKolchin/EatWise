@@ -33,8 +33,6 @@ export const codeJWT = (username: string, email: string, _id: string) => {
 
 }
 
-
-
 export const validateJwt = (token: string): boolean => {
     console.log('in validate jwt service')
     let secretKey: string = config.SECRET_KEY;
