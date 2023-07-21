@@ -105,6 +105,34 @@ export function recommendedCalories(age: number, weight: number, height: number,
       throw new Error('Invalid age');
     }
   }
+  export function recocommendedWater(age: number, weight: number, sportLevel: number,gender:number):number{
+   
+      // חישוב הכמות המומלצת של מים
+      let recommendedIntake = 0;
   
+      // ניתוח מין
+      if (gender ==1) {
+        // גברים
+        recommendedIntake = (weight * 35) / 1000;
+      } else if (gender ==2) {
+        // נשים
+        recommendedIntake = (weight * 31) / 1000;
+      }
+  
+      // ניתוח גיל
+      if (age <= 30) {
+        recommendedIntake += 40;
+      } else if (age > 30 && age <= 55) {
+        recommendedIntake += 35;
+      } else {
+        recommendedIntake += 30;
+      }
+  
+      // ניתוח רמת ספורט
+      recommendedIntake += sportLevel * 250;
+  
+   return recommendedIntake;
+   
+  }
   
   

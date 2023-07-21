@@ -17,10 +17,8 @@ export class User{
     daysUpdated:number = 0;
     lastUpdate?: string;
     administration:boolean = false;
+    recommendedWater:number=0;
+    DailyWater:number=0;
     
-
-    
-
-
 
 }

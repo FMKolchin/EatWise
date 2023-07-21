@@ -1,25 +1,18 @@
-import {IconButton } from "@mui/material"
-import { useNavigate } from "react-router-dom"
-import SettingsIcon from '@mui/icons-material/Settings';
+import { useNavigate } from "react-router-dom";
 
-export const Settings = () =>{
+export const Settings=()=>{
+
     const navigate = useNavigate();
-
-    const openSettingsPage = ()=>{
-      navigate('/changeDetails',{replace:true});
-    }
-
+const openPersonalDetailsPage=()=>{
+    navigate('/RegisterPersonalDetails',{replace:true});
+}
+const openAccountDetailsPage=()=>{
+    navigate('/ChangeAccountDetails',{replace:true});
+}
     return (
-        <IconButton
-        size="large"
-        edge="end"
-        aria-label="account of current user"
-        // aria-controls={menuId}
-        aria-haspopup="true"
-        onClick={openSettingsPage}
-        color="inherit"
-      >
-        <SettingsIcon />
-      </IconButton>
+        <>
+        <button onClick={openPersonalDetailsPage}>openPersonalDPage</button>
+        <button onClick={openAccountDetailsPage}>openAccountDetailsPage</button>
+        </>
     )
 }

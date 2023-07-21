@@ -2,13 +2,13 @@ import {IconButton } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import SettingsIcon from '@mui/icons-material/Settings';
 
-export const ChangeRegisterPersonalD = () =>{
+export const Settings = () =>{
     const navigate = useNavigate();
 
     const openSettingsPage = ()=>{
-      navigate('/RegisterPersonalDetails',{replace:true});
+      navigate('/changeDetails',{replace:true});
     }
-    
+
     return (
         <IconButton
         size="large"

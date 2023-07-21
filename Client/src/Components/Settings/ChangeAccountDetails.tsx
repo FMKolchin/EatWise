@@ -4,8 +4,9 @@ import { selectors } from "../../Redux/userSlice/slice";
 import { useState } from "react";
 import { changeDetails } from "../../API/user";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import Header from "../Header/Header";
 
-export const ChangeDetails=()=>{
+export const ChangeAccountDetails=()=>{
   const navigate:NavigateFunction = useNavigate();
     const user: User = useSelector(selectors.getUser);
  const [username, setUsername] = useState<string>("");
@@ -49,6 +50,7 @@ else{
 
     return (
         <div>
+          <Header></Header>
         <p>update</p>
         <form>
           <div>

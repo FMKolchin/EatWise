@@ -7,7 +7,7 @@ import { Home } from './Components/Home/Home'
 function App() {
 
   return (
-    <><Header></Header><Home></Home></>
+<Home></Home>
    
   )
 }

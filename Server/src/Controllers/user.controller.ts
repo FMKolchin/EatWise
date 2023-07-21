@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { changeDetails, login, savePersonalDetails, signup, updateDays } from '../Services/user.service';
+import { addWater, changeDetails, login, savePersonalDetails, signup, updateDays } from '../Services/user.service';
 import { promises } from 'dns';
 
 export const loginCtrl = async (req: Request, res: Response)  => {
@@ -8,7 +8,7 @@ export const loginCtrl = async (req: Request, res: Response)  => {
     try {
         console.log("before login service");
          result = await login(username, password);
-         console.log(result);
+        //  console.log(result);
          res.send(result);
     } catch (error:any) {
       console.log(error.message+"  error message!!");
@@ -48,9 +48,10 @@ export const savePersonalDetailsCtrl = async (req: Request, res:Response)=>{
       let height:number = parseInt(req.body.height);
       let sportLevel:number = parseInt(req.body.sportLevel);
       let gender:number = parseInt(req.body.gender);
+      let water:number = parseInt(req.body.water);
       let recommendedConsumption = req.body.recommendedConsumption;
       let token:string = req.body.token;
-     await savePersonalDetails(age,weight,height,sportLevel,gender,recommendedConsumption,token);
+     await savePersonalDetails(water,age,weight,height,sportLevel,gender,recommendedConsumption,token);
       console.log("finish controller function");
       res.send("successful saving");
     } catch (error:any) {
@@ -76,4 +77,25 @@ try {
   res.send(error.message+ " error in controller saving personal Data")
 }
 
+}
+// export const addWaterCtrl = async (req: Request, res:Response)=>{
+//   try {
+//     // userId:user.id,dailyWater:dailyWater
+//     let water:number = parseInt(req.body.dailyWater);
+//     let userId:string = req.body.userId;
+//    await addWater(water,userId);
+//     console.log("finish controller function");
+//     res.send();
+//   } catch (error:any) {
+//     res.send(error.message+ " error in controller saving personal Data")
+//   }
+// }
+export const addWaterCtrl = async (req: Request, res: Response) => {
+  console.log("in  ctrl addWater "+req.body);
+  const water = req.body.dailyWater;
+  const userId = req.body.userId;
+  console.log(userId)
+  console.log(water)
+  await addWater( userId,water);
+  res.send();
 }

@@ -5,9 +5,9 @@ import { User } from "../Models/User";
 
 
 export const nutritionById =async (id:string):Promise<Nutrition | null> =>{
-   console.log("id "+id);
+   // console.log("id "+id);
    let nut:Nutrition|null = (await axios.get(`${config.api}/nutrition/${id}`)).data;
-   console.log("nut "+nut);
+   // console.log("nut "+nut);
    return nut;
 }
 

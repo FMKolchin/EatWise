@@ -19,6 +19,7 @@ export const userFromCookie =async () :Promise<User>=>{
     user.weight = tempUser.weight;
     user.sportLevel = tempUser.sportLevel;
     user.gender = tempUser.gender;
+    user.recommendedWater=tempUser.recommendedWater
     try{
     user.averageConsumption = await nutritionById(tempUser.averageConsumption)??new Nutrition("",0,0,0,0,0,0,0);
     user.dailyConsumption =await nutritionById( tempUser.dailyConsumption)??new Nutrition("",0,0,0,0,0,0,0);
