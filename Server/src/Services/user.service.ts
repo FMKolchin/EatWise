@@ -46,7 +46,7 @@ import { Console } from "console";
   await UserModel.replaceOne({ _id: user._id }, user);
 }
 
-const updateUserPersonalDetails = async (userId: string, water:number,age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: string, dailyConsumption: string) => {
+const updateUserPersonalDetails = async (userId: string, water:number,age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: string, dailyConsumption: string,weeklyConsumption:string[],daysUpdated:number,lastUpdate:string) => {
   let fullUser: User | null = await getUserById(userId);
   if (fullUser) {
     fullUser.age = age;
@@ -58,6 +58,9 @@ const updateUserPersonalDetails = async (userId: string, water:number,age: numbe
     fullUser.dailyConsumption = dailyConsumption;
     fullUser.recommendedWater=water;
     fullUser.dailyWater=0;
+    fullUser.weeklyConsumption = weeklyConsumption;
+    fullUser.daysUpdated = daysUpdated;
+    fullUser.lastUpdate = lastUpdate;
     await updateUser(fullUser);
   }
 
@@ -66,13 +69,17 @@ const updateUserPersonalDetails = async (userId: string, water:number,age: numbe
  export const savePersonalDetails = async (water:number,age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: Nutrition, token: string): Promise<void> => {
   //save recommeded Consumption to nutrition table db
   try {
+    let weeklyConsumption = ["","","","","","",""];
+    let day:number = getDayOfWeek();
     let dailyConsumption: Nutrition = new Nutrition();
     dailyConsumption._id = new objectId();
+    weeklyConsumption[day]  = dailyConsumption._id.toString();
+    console.log(weeklyConsumption[day]);
     recommendedConsumption._id = new objectId();
     dailyConsumption = await createNutrition(dailyConsumption);
     recommendedConsumption = await createNutrition(recommendedConsumption);
     let userId: string = (await decodeJWT(token))._id;
-    await updateUserPersonalDetails(userId,water, age, weight, height, sportLevel, gender, recommendedConsumption._id, dailyConsumption._id);
+    await updateUserPersonalDetails(userId,water, age, weight, height, sportLevel, gender, recommendedConsumption._id, dailyConsumption._id,weeklyConsumption,0,"");
   }
   catch (error: any) {
   }
@@ -131,6 +138,7 @@ const ChangeDetails = async (userId: string,username:string,password:string,emai
   }
 
 }
+
 const updateWater = async (userId: string,water:number) => {
   let fullUser: User | null = await getUserById(userId);
   if (fullUser) {
@@ -149,15 +157,15 @@ const updateWater = async (userId: string,water:number) => {
   }
 
 }
+
 export const changeDetails = async (username: string, password: string, email: string, token: string) => {
   let userId: string = (await decodeJWT(token))._id;
   await ChangeDetails(userId, username,password,email);
 }
+
 export const addWater = async (water:number, userId:string) => {
    await updateWater(userId,water);
 }
-
-
 
 export const increase1DaysUpdate = async (userId:string)=>{
   let user:User|null = await getUserById(userId);
@@ -177,7 +185,8 @@ export const getLastUpdate = async (userId:string)=>{
 
 export const saveDayNutValuesToWeeklyConsomption = async (userId:string,nutId:string) =>{
      let user:User = (await getUserById(userId))!;
-     user.weeklyConsumption[getDayOfWeek()] = nutId;
+     user.weeklyConsumption[getDayOfWeek()] = nutId.toString();
+     user.dailyConsumption = nutId;
      await updateUser(user);
 }
 

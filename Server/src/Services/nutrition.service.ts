@@ -35,6 +35,7 @@ export const addNutValues = async (nutId:string,nutValues:Nutrition):Promise<voi
 }
 
 export const addFoodOption = async(nut:Nutrition,userId:string):Promise<User>=>{
+    console.log("start addFoodOption in service: "+JSON.stringify(nut)+"\n"+userId);
     if(await getLastUpdate(userId)!=getDateInString()){
         await increase1DaysUpdate(userId);
         await updateLastUpdatedDate(userId);
@@ -47,7 +48,9 @@ export const addFoodOption = async(nut:Nutrition,userId:string):Promise<User>=>{
         let user:User = (await getUserById(userId))!;
         addNutValues(user.dailyConsumption!,nut);
      }
-     return (await getUserById(userId))!;
+     let user:User = (await getUserById(userId))!;
+     console.log(user);
+     return user;
 }
 
 

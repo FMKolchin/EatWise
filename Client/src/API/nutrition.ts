@@ -6,6 +6,7 @@ import { anyToUser } from "../Services/userFromCookie";
 
 
 export const nutritionById =async (id:string):Promise<Nutrition | null> =>{
+   console.log("nutID "+id);
    let nut:Nutrition|null = (await axios.get(`${config.api}/nutrition/${id}`)).data;
    return nut;
 }
@@ -23,8 +24,11 @@ export const addNutValues = async (user:User,nut:Nutrition):Promise<User>=>{
 }
 
 export const addFoodOption = async(_user:User,nut:Nutrition) =>{
-   let userT:any =await axios.put(`${config.api}/nutrition/addFoodOption`,{userId:_user.id,nutValues:nut});
+   console.log("start addFoodOption: "+JSON.stringify(_user)+"\n"+JSON.stringify(nut));
+   let userT:any =await axios.put(`${config.api}/nutrition/addFoodOption`,{userId:_user.id,nut:nut});
+   console.log("result back from put addFoodOption: "+JSON.stringify(userT));
    let user:User = await anyToUser(userT);
+   console.log("result back from anyToUser: "+JSON.stringify(user));
    return user;
 
 }

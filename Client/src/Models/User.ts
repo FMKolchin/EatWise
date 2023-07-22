@@ -15,7 +15,7 @@ export class User{
     averageConsumption?:Nutrition |undefined= new Nutrition("",0,0,0,0,0,0,0);
     weeklyConsumption:Nutrition[] = [new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),new Nutrition("",0,0,0,0,0,0,0),];
     daysUpdated:number = 0;
-    lastUpdate?: string;
+    lastUpdate: string ="";
     administration:boolean = false;
     recommendedWater:number=0;
     DailyWater:number=0;
