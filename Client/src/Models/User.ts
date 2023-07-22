@@ -1,7 +1,7 @@
 import { Nutrition } from "./Nutrition";
 
 export class User{
-    id:number = 0;
+    id:string = "";
     username: string ="";
     password:string = "";
     email:string = "";

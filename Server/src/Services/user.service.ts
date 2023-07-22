@@ -1,3 +1,4 @@
+import { json } from "body-parser";
 import { ClientError, NotFoundError } from "../Models/Error";
 import { Nutrition } from "../Models/nutrition.model";
 import { User, UserModel } from "../Models/user.model";
@@ -34,6 +35,7 @@ import { Console } from "console";
 }
 
  export const getUserById = async (_id: string): Promise<User | null> => {
+  console.log("in getUserById")
   return await UserModel.findById(_id);
 
 }
@@ -43,6 +45,7 @@ import { Console } from "console";
 }
 
  const updateUser = async (user: User): Promise<void> => {
+  console.log("in updateUser")
   await UserModel.replaceOne({ _id: user._id }, user);
 }
 
@@ -140,8 +143,13 @@ const ChangeDetails = async (userId: string,username:string,password:string,emai
 }
 
 const updateWater = async (userId: string,water:number) => {
+  console.log("in updateWater service!!!!!!!!!!!!")
+  console.log("  water|||||||||"+water)
+  // water=120;
   let fullUser: User | null = await getUserById(userId);
   if (fullUser) {
+    console.log("in ifff")
+    console.log(JSON.stringify(fullUser));
     fullUser.username=fullUser.username
     fullUser.email=fullUser.email
     fullUser.password = fullUser.password;
@@ -152,8 +160,13 @@ const updateWater = async (userId: string,water:number) => {
     fullUser.sportLevel = fullUser.sportLevel;
     fullUser.recommendedConsumption = fullUser.recommendedConsumption;
     fullUser.dailyConsumption = fullUser.dailyConsumption;
-    fullUser.dailyWater=water+120;
+    fullUser.dailyWater+=water;
+
     await updateUser(fullUser);
+
+  }
+  else{
+    console.log("in else!@@@@@@@@@@@")
   }
 
 }
@@ -163,7 +176,7 @@ export const changeDetails = async (username: string, password: string, email: s
   await ChangeDetails(userId, username,password,email);
 }
 
-export const addWater = async (water:number, userId:string) => {
+export const addWater = async (userId:string ,water:number) => {
    await updateWater(userId,water);
 }
 
