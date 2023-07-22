@@ -188,10 +188,13 @@ export const increase1DaysUpdate = async (userId:string)=>{
 
 export const updateLastUpdatedDate = async (userId:string)=>{
   let user:User|null = await getUserById(userId);
-  user!.lastUpdate = Date.now().toString();
+  console.log("in updateLastUpdateDate " +user);
+  user!.lastUpdate = getDateInString();
+  await updateUser(user!);
 }
 
 export const getLastUpdate = async (userId:string)=>{
+  console.log("start get lastUpdate " +userId);
   let user:User|null = await getUserById(userId);
   return user!.lastUpdate;
 }
