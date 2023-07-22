@@ -14,6 +14,7 @@ export const getNutritionById = async (id: string,): Promise<Nutrition | null> =
 }
 
 export const createNutrition = async (nutrition:Nutrition): Promise<Nutrition> => {
+    console.log("in create nutrition");
     return await NutritionModel.create(nutrition);
 }
 
@@ -37,6 +38,7 @@ export const addNutValues = async (nutId:string,nutValues:Nutrition):Promise<voi
 export const addFoodOption = async(nut:Nutrition,userId:string):Promise<User>=>{
     console.log("start addFoodOption in service: "+JSON.stringify(nut)+"\n"+userId);
     if(await getLastUpdate(userId)!=getDateInString()){
+        console.log("in if addFoodOption");
         await increase1DaysUpdate(userId);
         await updateLastUpdatedDate(userId);
         let nutId:string = new objectId();
@@ -45,11 +47,12 @@ export const addFoodOption = async(nut:Nutrition,userId:string):Promise<User>=>{
         await saveDayNutValuesToWeeklyConsomption(userId,nutId);   
      }
      else{
+        console.log("in else addFoodOption");
         let user:User = (await getUserById(userId))!;
         addNutValues(user.dailyConsumption!,nut);
      }
      let user:User = (await getUserById(userId))!;
-     console.log(user);
+     console.log("in end addFood"+user);
      return user;
 }
 

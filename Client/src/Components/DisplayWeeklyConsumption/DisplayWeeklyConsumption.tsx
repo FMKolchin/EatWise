@@ -74,7 +74,7 @@ const setLables = ()=>{
  let days:number[] = getDaysNumbers();
   let lables:string[] = [];
   for (let i = 0; i <7; i++) {
-      lables.push(DaysOfWeek[days[i]]);
+      lables.push(DaysOfWeek[days[i]%7]);
   }
   return lables;
 }
