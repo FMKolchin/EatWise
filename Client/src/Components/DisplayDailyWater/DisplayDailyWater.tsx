@@ -14,11 +14,10 @@ const DisplayDailyWater = (props:any) => {
 
 
   const handleClick = () => {
-    console.log("before click dispatch in water");
+
     dispatch(actions.onAddToDailyWaterRequest({ user: user,water:props.user.recommendedWater }));
   };
 
-console.log(props.user.age+" age",props.user.gender+" gender",+props.user.recommendedWater+" recommendedWatre")
   const chartData = [
     {
       type: 'Recommended Intake',

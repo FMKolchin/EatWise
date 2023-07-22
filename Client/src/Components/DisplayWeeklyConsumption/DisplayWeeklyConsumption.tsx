@@ -87,7 +87,6 @@ const getDaysNumbers = ()=>{
 
 export function DisplayWeeklyConsumption(props:any) {
   const weeklyConsumption:Nutrition[] = props.weeklyConsumption;
-  console.log(JSON.stringify(weeklyConsumption));
   const lables:string[] = setLables();
   data.labels = lables;
   let proteins:number[] = [];
@@ -95,7 +94,6 @@ export function DisplayWeeklyConsumption(props:any) {
     proteins.push(weeklyConsumption[i].proteins);
    
   }
-  console.log(JSON.stringify(proteins));
   data.datasets[0].data = proteins;
 
   let sugars:number[] = [];

@@ -35,7 +35,6 @@ export const anyToUser = async (tempUser: any): Promise<User> => {
     user.recommendedWater=tempUser.recommendedWater
     }
     catch {
-        console.log("error in updateing user Consumption...");
     }
 
     user.daysUpdated = tempUser.daysUpdated;
@@ -45,7 +44,6 @@ export const anyToUser = async (tempUser: any): Promise<User> => {
 }
 export const userFromCookie = async (): Promise<User> => {
     const token: string = Cookies.get()['jwt'];
-    console.log("token we got from cookie " + token);
     let tempUser: any = await getUserFromToken(token);
     let user: User = await anyToUser(tempUser);
     return user;

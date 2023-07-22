@@ -27,11 +27,9 @@ export const  RegisterPersonalDetails = ()=>{
 
     const savePersonalDetailsFunc = async() =>{
         try {
-            console.log("before api function register personal details");
             let water:number=recocommendedWater(age,weight,sportLevel,gender)
             let recommendedConsumption:Nutrition = calculateRecommendedConsumption();
             await SavePersonalDetails(water,age,weight,height,sportLevel,gender,recommendedConsumption);
-            console.log("after api function register personal details");
             navigate('/home',{replace:true});
         } catch (error:any) {
             alert(error.message+" error in savePersonalDetails");

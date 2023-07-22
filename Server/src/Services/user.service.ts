@@ -29,13 +29,11 @@ import { Console } from "console";
     return token;
   }
   else {
-    console.log("user email exist throw error here! ");
-    throw new ClientError("you are already connected with this email account");
+        throw new ClientError("you are already connected with this email account");
   }
 }
 
  export const getUserById = async (_id: string): Promise<User | null> => {
-  console.log("id "+_id);
   return await UserModel.findById(_id);
 
 }
@@ -45,10 +43,7 @@ import { Console } from "console";
 }
 
  const updateUser = async (user: User): Promise<void> => {
-  console.log("in updateUser")
-  console.log("((((((((((((((((((((((((((((((((((((((((((((((");
   await UserModel.replaceOne({ _id: user._id }, user);
-  // console.log(`Updated `+user );
 }
 
 const updateUserPersonalDetails = async (userId: string, water:number,age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: string, dailyConsumption: string) => {
@@ -80,19 +75,16 @@ const updateUserPersonalDetails = async (userId: string, water:number,age: numbe
     await updateUserPersonalDetails(userId,water, age, weight, height, sportLevel, gender, recommendedConsumption._id, dailyConsumption._id);
   }
   catch (error: any) {
-    console.log("error in savePersonal Details " + error.message);
   }
 }
 
 export const updateDays = async (userID:string):Promise<User|null> => {
   let fullDate:Date = new Date();
   let date:Date = new Date(fullDate.getFullYear(), fullDate.getMonth(), fullDate.getDate());
-  // console.log(date);
   let user:User|null = await getUserById(userID);
   if(user){
     if(date.toString()!=user.lastUpdate){
     user.lastUpdate = date.toString();
-    // console.log(user);
     if(!user.daysUpdated){
       user.daysUpdated = 1;
     }
@@ -100,7 +92,6 @@ export const updateDays = async (userID:string):Promise<User|null> => {
       user.daysUpdated++;
     }
     await updateUser(user);
-    // console.log("user "+user);
     return user;
   }
   }
@@ -141,11 +132,8 @@ const ChangeDetails = async (userId: string,username:string,password:string,emai
 
 }
 const updateWater = async (userId: string,water:number) => {
-  console.log("before update in user.service addWater")
   let fullUser: User | null = await getUserById(userId);
-  console.log(userId)
   if (fullUser) {
-    console.log("in if updateWater")
     fullUser.username=fullUser.username
     fullUser.email=fullUser.email
     fullUser.password = fullUser.password;
@@ -157,20 +145,16 @@ const updateWater = async (userId: string,water:number) => {
     fullUser.recommendedConsumption = fullUser.recommendedConsumption;
     fullUser.dailyConsumption = fullUser.dailyConsumption;
     fullUser.dailyWater=water+120;
-    console.log("after update in user.service addWater")
     await updateUser(fullUser);
   }
 
 }
 export const changeDetails = async (username: string, password: string, email: string, token: string) => {
-  console.log("in user.service changeDetails")
   let userId: string = (await decodeJWT(token))._id;
   await ChangeDetails(userId, username,password,email);
 }
 export const addWater = async (water:number, userId:string) => {
-  console.log("in user.service addWater")
    await updateWater(userId,water);
-   console.log("in user.service after addWater")
 }
 
 

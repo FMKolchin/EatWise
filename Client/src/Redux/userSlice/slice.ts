@@ -15,10 +15,8 @@ const slice=createSlice({
             state=action.payload
         },
         onInitUserRequest:(state)=>{
-            console.log("in  req init");
         },
         onInitUserSuccess:(state,action)=>{
-            console.log("in success init "+action.payload);
              state.user=action.payload;
         },
         onAddToDailyConsomptionRequest:(state,action)=>{

@@ -6,14 +6,10 @@ const jwt = require('jsonwebtoken');
 const config = require('../Config/JWT')
 //function gets a token, decodes it and returns the user.
 export const decodeJWT = async (token: string): Promise<User> => {
-    console.log("token before split :" + token);
     let splitToken = token.split(' ')[1];
-    console.log("token after split :" + splitToken);
     const decodedToken = jwt.decode(splitToken, config.TOKEN_KEY) as { [key: string]: string };
     const { _id } = decodedToken;
-    console.log("id :" + _id);
     const user: User|null = await getUserById(_id);
-    console.log("user from token :" + user)
     return user??new User();
 }
 //function gets user details and returns token
@@ -28,13 +24,11 @@ export const codeJWT = (username: string, email: string, _id: string) => {
         })
     token = "Bearer " + token;
 
-    console.log("token :" + token);
     return token;
 
 }
 
 export const validateJwt = (token: string): boolean => {
-    console.log('in validate jwt service')
     let secretKey: string = config.SECRET_KEY;
     try {
 
@@ -44,7 +38,6 @@ export const validateJwt = (token: string): boolean => {
         }
 
         // Verify the token signature
-        console.log('in try varify token ' + token);
         const decoded = jwt.verify(token, secretKey);
 
         // Check expiration time (optional)
@@ -55,7 +48,6 @@ export const validateJwt = (token: string): boolean => {
 
         return true; // Token is valid
     } catch (error) {
-        console.log('in catch varify token',)
         return false; // Token verification failed
     }
 };

@@ -14,7 +14,6 @@ function* onAddFoodOption(action:any) {
         yield put(actions.onAddFoodOptionSuccess(data));
     }
     catch(e){
-        console.log(e);
     }
 }
 

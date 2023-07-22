@@ -16,7 +16,6 @@ async function connect(){
 
 function closeDBConnection() {
     mongoose.connection.close(() => {
-      console.log('MongoDB connection closed');
     //   process.exit(0); // Optional: Exit the process after closing the connection
     });
   }

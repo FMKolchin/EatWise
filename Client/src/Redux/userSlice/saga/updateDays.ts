@@ -7,12 +7,10 @@ import { updateDays } from "../../../API/user";
 function* onUpdateDaysFunction(action:any) {
     try{
         let user:string = action.payload.user;
-        console.log("user in saga" + user);
         const data:User=yield call(updateDays,user);
         yield put(actions.onUpdateDaysSuccess(data));
     }
     catch(e){
-        console.log(e);
     }
 }
 

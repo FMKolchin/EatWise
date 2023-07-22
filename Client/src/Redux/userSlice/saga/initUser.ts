@@ -7,7 +7,6 @@ function* onInitUserFunction() {
     try{
         
         const data:User=yield call(userFromCookie);
-        // console.log("in init data "+data);
         yield put(actions.onInitUserSuccess(data));
     }
     catch(e){
