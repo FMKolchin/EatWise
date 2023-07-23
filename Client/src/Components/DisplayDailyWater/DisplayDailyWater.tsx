@@ -10,21 +10,23 @@ import { addWater } from '../../API/user';
 const DisplayDailyWater = (props:any) => {
   // const [cups, setCups] = useState<number>(0);
 
-  const user: User = useSelector(selectors.getUser);
-  const [stateWater,setStateWater] = useState(user.DailyWater);
+
+  const [stateWater,setStateWater] = useState<number>(0);
   
     
 
   useEffect(()=>{
-    setStateWater(user.DailyWater);
-  },[,props.user.DailyWater]);
+   setStateWater(props.user.dailyWater);
+  });
   
-  // const dispatch = useDispatch();
+ //const dispatch = useDispatch();
 
 
-  const handleClick = (amountOfWater:number) => {
-     addWater(user.id,amountOfWater);
-  //  dispatch(actions.onAddToDailyWaterRequest({ user: user,water:user.recommendedWater }));
+  const handleClick = (amountOfWater:number) => {    
+    setStateWater(props.user.dailyWater)
+    addWater(props.user.id,amountOfWater);
+
+  //dispatch(actions.onAddToDailyWaterRequest({ user: props.user.id,water:props.user.dailyWater }));
   };
 
   const chartData = [
@@ -42,7 +44,7 @@ const DisplayDailyWater = (props:any) => {
   // };
   return (
     <div>
-      <h1>{user.DailyWater}</h1>
+      <h3>{stateWater}</h3>
       <h3>כוסות</h3>
       <h3> מ"ל {props.user.recommendedWater}</h3>
       <Button variant="contained"  onClick={() => { console.log("cliced now in Water: " ); handleClick(120) }}>

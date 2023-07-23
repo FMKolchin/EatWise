@@ -18,7 +18,7 @@ export class User{
     lastUpdate: string ="";
     administration:boolean = false;
     recommendedWater:number=0;
-    DailyWater:number=0;
+    dailyWater:number=0;
     
 
 }

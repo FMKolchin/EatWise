@@ -60,7 +60,7 @@ const updateUserPersonalDetails = async (userId: string, water:number,age: numbe
     fullUser.recommendedConsumption = recommendedConsumption;
     fullUser.dailyConsumption = dailyConsumption;
     fullUser.recommendedWater=water;
-    fullUser.dailyWater=0;
+    fullUser.dailyWater=fullUser.dailyWater;
     fullUser.weeklyConsumption = weeklyConsumption;
     fullUser.daysUpdated = daysUpdated;
     fullUser.lastUpdate = lastUpdate;
@@ -69,7 +69,7 @@ const updateUserPersonalDetails = async (userId: string, water:number,age: numbe
 
 }
 
- export const savePersonalDetails = async (water:number,age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: Nutrition, token: string): Promise<void> => {
+ export const savePersonalDetails = async (recommendedWater:number,age: number, weight: number, height: number, sportLevel: number, gender: number, recommendedConsumption: Nutrition, token: string): Promise<void> => {
   //save recommeded Consumption to nutrition table db
   try {
     let weeklyConsumption = ["","","","","","",""];
@@ -82,7 +82,7 @@ const updateUserPersonalDetails = async (userId: string, water:number,age: numbe
     dailyConsumption = await createNutrition(dailyConsumption);
     recommendedConsumption = await createNutrition(recommendedConsumption);
     let userId: string = (await decodeJWT(token))._id;
-    await updateUserPersonalDetails(userId,water, age, weight, height, sportLevel, gender, recommendedConsumption._id, dailyConsumption._id,weeklyConsumption,0,"");
+    await updateUserPersonalDetails(userId,recommendedWater, age, weight, height, sportLevel, gender, recommendedConsumption._id, dailyConsumption._id,weeklyConsumption,0,"");
   }
   catch (error: any) {
   }
@@ -129,7 +129,6 @@ const ChangeDetails = async (userId: string,username:string,password:string,emai
       fullUser.email=email;
     }
     fullUser.password = password;
-
     fullUser.age = fullUser.age;
     fullUser.weight =fullUser.weight;
     fullUser.height = fullUser.height;
@@ -137,18 +136,16 @@ const ChangeDetails = async (userId: string,username:string,password:string,emai
     fullUser.sportLevel = fullUser.sportLevel;
     fullUser.recommendedConsumption = fullUser.recommendedConsumption;
     fullUser.dailyConsumption = fullUser.dailyConsumption;
+    fullUser.dailyWater=fullUser.dailyWater;
     await updateUser(fullUser);
   }
 
 }
 
 const updateWater = async (userId: string,water:number) => {
-  console.log("in updateWater service!!!!!!!!!!!!")
-  console.log("  water|||||||||"+water)
   // water=120;
   let fullUser: User | null = await getUserById(userId);
   if (fullUser) {
-    console.log("in ifff")
     console.log(JSON.stringify(fullUser));
     fullUser.username=fullUser.username
     fullUser.email=fullUser.email
