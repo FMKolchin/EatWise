@@ -58,7 +58,7 @@ export const Home = () => {
                         </Grid>
                     </Grid>
                    
-                    <DisplayWeeklyConsumption weeklyConsumption={user.weeklyConsumption}></DisplayWeeklyConsumption>
+                    {/* <DisplayWeeklyConsumption weeklyConsumption={user.weeklyConsumption}></DisplayWeeklyConsumption> */}
                 </Grid>
                 <Grid item>
                     <AddFood />

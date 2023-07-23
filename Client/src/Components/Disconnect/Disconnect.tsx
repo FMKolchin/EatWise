@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom"
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useSelector } from "react-redux";
 import { selectors } from "../../Redux/userSlice/slice";
+import { User } from "../../Models/User";
 
 export const Disconnect = () =>{
     const navigate = useNavigate();
-    const userRedux = useSelector(selectors.getUser);
+    const user:User = useSelector(selectors.getUser);
+
     const disconnect = ()=>{
         deleteCookie();
 
