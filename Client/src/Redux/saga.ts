@@ -17,6 +17,7 @@ export default function* root() {
             fork(WatchOnUpdateDays),
             fork(WatchOnAddToDailyWater),
             fork(WatchOnAddFoodOption),
+      
         ]
     )
 }

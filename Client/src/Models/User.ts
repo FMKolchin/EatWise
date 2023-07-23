@@ -1,7 +1,7 @@
 import { Nutrition } from "./Nutrition";
 
 export class User{
-    id:number = 0;
+    id:string = "";
     username: string ="";
     password:string = "";
     email:string = "";
@@ -18,7 +18,7 @@ export class User{
     lastUpdate: string ="";
     administration:boolean = false;
     recommendedWater:number=0;
-    DailyWater:number=0;
+    dailyWater:number=0;
     
 
 }

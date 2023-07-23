@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PieChart } from '@mui/x-charts';
 import { Button, TextField } from '@mui/material';
 import { User } from '../../Models/User';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions, selectors } from '../../Redux/userSlice/slice';
+import { addWater } from '../../API/user';
 
 
 const DisplayDailyWater = (props:any) => {
-  const [cups, setCups] = useState<number>(0);
-
-  const user: User = useSelector(selectors.getUser);
-  const dispatch = useDispatch();
+  // const [cups, setCups] = useState<number>(0);
 
 
-  const handleClick = () => {
+  const [stateWater,setStateWater] = useState<number>(0);
+  
+    
 
-    dispatch(actions.onAddToDailyWaterRequest({ user: user,water:props.user.recommendedWater }));
+  useEffect(()=>{
+   setStateWater(props.user.dailyWater);
+  });
+  
+ //const dispatch = useDispatch();
+
+
+  const handleClick = (amountOfWater:number) => {    
+    setStateWater(props.user.dailyWater)
+    addWater(props.user.id,amountOfWater);
+
+  //dispatch(actions.onAddToDailyWaterRequest({ user: props.user.id,water:props.user.dailyWater }));
   };
 
   const chartData = [
@@ -25,7 +36,7 @@ const DisplayDailyWater = (props:any) => {
     },
     {
       type: 'Current Intake',
-      value: cups,
+      value: stateWater,
     },
   ];
   // const handleAddCup = () => {
@@ -33,10 +44,14 @@ const DisplayDailyWater = (props:any) => {
   // };
   return (
     <div>
-      <h3>{cups} כוסות</h3>
+      <h3>{stateWater}</h3>
+      <h3>כוסות</h3>
       <h3> מ"ל {props.user.recommendedWater}</h3>
-      <Button variant="contained"  onClick={() => { console.log("cliced now in Water: " ); handleClick() }}>
+      <Button variant="contained"  onClick={() => { console.log("cliced now in Water: " ); handleClick(120) }}>
         הוסף כוס
+      </Button>
+      <Button variant="contained"  onClick={() => { console.log("cliced now in Water: " ); handleClick(1000) }}>
+       הוסף בקבוק
       </Button>
       <div style={{ marginTop: '20px', width: '300px' }}>
       <PieChart

@@ -32,7 +32,8 @@ export const anyToUser = async (tempUser: any): Promise<User> => {
             user.weeklyConsumption.push(nutValueByDay);
 
         }
-    user.recommendedWater=tempUser.recommendedWater
+    user.recommendedWater=tempUser.recommendedWater;
+    user.dailyWater=tempUser.dailyWater;
     }
     catch {
     }

@@ -1,8 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import { actions } from "../slice";
 import { User } from "../../../Models/User";
-import { Nutrition } from "../../../Models/Nutrition";
-import { addNutValues } from "../../../API/nutrition";
 import { addWater } from "../../../API/user";
 
 function* onAddToDailyWater(action:any) {
@@ -11,7 +9,7 @@ function* onAddToDailyWater(action:any) {
         let user:User = action.payload.user;
         let water:number = action.payload.water;
         alert(water);
-        const data:User=yield call(addWater,user,water);
+        const data:User=yield call(addWater,user.id,water);
         yield put(actions.onAddToDailyWaterSuccess(data));
     }
     catch(e){

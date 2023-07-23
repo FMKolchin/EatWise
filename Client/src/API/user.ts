@@ -79,8 +79,7 @@ export const changeDetails=async(username : string,email: string, password : str
         return res;
 }
 
-export const addWater = async (user:User,dailyWater:number)=>{
-alert("in addWater")
-  await axios.post(`${config.api}/user/addWater`,{userId:user.id,dailyWater:dailyWater});
+export const addWater = async (userId:string,dailyWater:number)=>{
+  await axios.post(`${config.api}/user/addWater`,{userId:userId,dailyWater:dailyWater});
 
 }

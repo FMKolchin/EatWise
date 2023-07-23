@@ -66,8 +66,11 @@ try {
 }
 
 export const addWaterCtrl = async (req: Request, res: Response) => {
+  console.log("in addWaterCtrl")
   const water = req.body.dailyWater;
   const userId = req.body.userId;
+  console.log("userId "+userId);
+  console.log("water  "+water);
   await addWater( userId,water);
   res.send();
 }

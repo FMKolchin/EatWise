@@ -7,5 +7,6 @@ export const validateJwtCtrl = async (req:Request, res:Response) => {
 
 export const getUserFromToken = async (req:Request, res:Response) => {
     let user:any =await decodeJWT(req.body.token);
+    console.log("getUserFromToken  "+JSON.stringify(user)+"#############"+ user.dailyWater)
    res.send(user);
   }
