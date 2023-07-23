@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import { Login } from './Components/Login/Login';
-import { SignUp } from './Components/SignUp/SignUp';
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // import { createRoot } from 'react-dom';
 import { Home } from './Components/Home/Home';
@@ -13,6 +13,7 @@ import configStoreFunction from './Redux/configStore';
 import { Provider } from 'react-redux';
 import { ChangeAccountDetails } from './Components/Settings/ChangeAcountDetails';
 import { Settings } from './Components/Settings/Settings';
+import SignUp from './Components/SignUp/SignUp';
 
 interface Route {
   path: string;

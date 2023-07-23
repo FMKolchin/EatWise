@@ -8,8 +8,8 @@ import Header from "../Header/Header";
 
 export const ChangeAccountDetails=()=>{
   const navigate:NavigateFunction = useNavigate();
-    const user: User = useSelector(selectors.getUser);
- const [username, setUsername] = useState<string>("");
+  const user: User = useSelector(selectors.getUser);
+  const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
@@ -26,12 +26,13 @@ export const ChangeAccountDetails=()=>{
   }
 const save=async ()=>{
    alert("in save");
-if(password!=user.password)
+
+if(password.localeCompare(user.password))
 {
   alert("סיסמה שגויה");
 }
 else{
-    if(validateUsername()&&newPassword.length>8)
+    if(!(validateUsername()&&newPassword.length>8))
     {
 try{
     await changeDetails(username,newPassword,email);
