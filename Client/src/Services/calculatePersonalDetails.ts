@@ -113,10 +113,10 @@ export function recommendedCalories(age: number, weight: number, height: number,
       // ניתוח מין
       if (gender ==1) {
         // גברים
-        recommendedIntake = (weight * 35) / 1000;
+        recommendedIntake = (weight * 35);
       } else if (gender ==2) {
         // נשים
-        recommendedIntake = (weight * 31) / 1000;
+        recommendedIntake = (weight * 31);
       }
   
       // ניתוח גיל

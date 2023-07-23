@@ -25,6 +25,7 @@ const DisplayDailyWater = (props:any) => {
   const handleClick = (amountOfWater:number) => {    
     setStateWater(props.user.dailyWater)
     addWater(props.user.id,amountOfWater);
+    window.location.reload();
 
   //dispatch(actions.onAddToDailyWaterRequest({ user: props.user.id,water:props.user.dailyWater }));
   };
@@ -32,11 +33,13 @@ const DisplayDailyWater = (props:any) => {
   const chartData = [
     {
       type: 'Recommended Intake',
-      value: props.user.recommendedWater,
+      value: props.user.recommendedWater-stateWater,
+      color: "#31C48D"
     },
     {
       type: 'Current Intake',
       value: stateWater,
+      color:"#FFB968"
     },
   ];
   // const handleAddCup = () => {
@@ -44,22 +47,29 @@ const DisplayDailyWater = (props:any) => {
   // };
   return (
     <div>
-      <h3>{stateWater}</h3>
-      <h3>כוסות</h3>
+      <h3>מ"ל {stateWater}</h3>
+      <h3></h3>
       <h3> מ"ל {props.user.recommendedWater}</h3>
-      <Button variant="contained"  onClick={() => { console.log("cliced now in Water: " ); handleClick(120) }}>
+      <Button variant="contained"  onClick={() => { console.log("cliced now in Water: " ); handleClick(140) }}>
         הוסף כוס
       </Button>
-      <Button variant="contained"  onClick={() => { console.log("cliced now in Water: " ); handleClick(1000) }}>
+      <Button variant="contained"  onClick={() => { console.log("cliced now in Water: " ); handleClick(500) }}>
        הוסף בקבוק
       </Button>
       <div style={{ marginTop: '20px', width: '300px' }}>
       <PieChart
       series={[
         {
-          outerRadius: 80,
 
           data: chartData,
+          innerRadius: 30,
+          outerRadius: 100,
+          paddingAngle: 5,
+          cornerRadius: 5,
+          startAngle: -180,
+          endAngle: 180,
+          cx: 150,
+          cy: 150,
         }
       ]}
       height={300}

@@ -52,9 +52,10 @@ const getState=(state:any)=>{
     return state[USER_SLICE]||initialState;
 }
 
+
 export const selectors={
     getUser:createSelector(getState,(state)=>state.user),
-    // initUser:createSelector(getState,(state)=>state)
+
 
 }
 
