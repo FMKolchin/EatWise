@@ -43,7 +43,7 @@ export const Login = (): JSX.Element => {
       <Typography variant="h5" gutterBottom>
         Login
       </Typography>
-      <Link to="../signup">new here? sign up!</Link>
+      <Link  to="../signup" >new here? sign up!</Link>
       <form>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -68,7 +68,8 @@ export const Login = (): JSX.Element => {
             />
           </Grid>
         </Grid>
-        <Button fullWidth variant="contained" color="primary" onClick={authDetails}>
+        <br></br>
+        <Button sx={{ backgroundColor: '#31c48d' }} fullWidth variant="contained" color="primary" onClick={authDetails}>
           Login
         </Button>
       </form>

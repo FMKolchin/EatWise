@@ -1,17 +1,14 @@
-import { Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
-import { ReactNode, useState } from "react"
-import SaveAsIcon from '@mui/icons-material/SaveAs';
+import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material"
 import {SavePersonalDetails} from '../../API/user';
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { Nutrition } from "../../Models/Nutrition";
-import {recommendedCalories,activityFactor,recommendedCarbohydrates,
+import {recommendedCalories,
 recommendedCholesterol,recommendedFiber,recommendedSodium,recommendedProtein,
 recommendedSugar,recommendedTotalFat, recocommendedWater} from "../../Services/calculatePersonalDetails";
 import { selectors } from "../../Redux/userSlice/slice";
 import { User } from "../../Models/User";
 import { useSelector } from "react-redux";
-import Header from "../Header/Header";
-
+import { useState } from "react";
 
 
 export const  RegisterPersonalDetails = ()=>{
@@ -22,9 +19,9 @@ export const  RegisterPersonalDetails = ()=>{
     const [sportLevel,setSportLevel] = useState<number>(0);
     const [gender,setGender] = useState<number>(0);
     const navigate:NavigateFunction = useNavigate();
-
-
-
+    const cancel = () => {
+      navigate('/home', { replace: true })
+    }
     const savePersonalDetailsFunc = async() =>{
         try {
             let water:number=recocommendedWater(age,weight,sportLevel,gender)
@@ -49,54 +46,114 @@ export const  RegisterPersonalDetails = ()=>{
         setGender(Number(event.target.value));
     }
 
-    return(
-        <div>
-          {/* <Header></Header> */}
-            <form action="">
-              {/* <h1>{user.age}</h1> */}
-            <TextField id="age" label="גיל" required variant="standard" value={age} onChange={e=>{setAge(Number(e.target.value))}} placeholder={String(user.age)} type="number" InputProps={{ inputProps: { min: 0} }}/>
-            <br/>
-            <TextField id="weight" label="משקל" required variant="standard" value={weight} onChange={e=>{setWeight(Number(e.target.value))}} type="number" InputProps={{ inputProps: { min: 0 } }}/>
-            <br/>
-            <TextField id="height" label="גובה" required variant="standard" value={height} onChange={e=>{setHeight(Number(e.target.value))}}  type="number" InputProps={{ inputProps: { min: 0 } }}/>
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">רמת כושר</InputLabel>
-        <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
-          value={sportLevel}
-          onChange={handleChangeSportLevel}
-          label="sport level"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={1}>נמוך</MenuItem>
-          <MenuItem value={2}>בינוני</MenuItem>
-          <MenuItem value={3}>גבוה</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">מין</InputLabel>
-        <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
-          value={gender}
-          onChange={handleChangeGender}
-          label="Gender"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={1}>male</MenuItem>
-          <MenuItem value={2}>female</MenuItem>
-          
-        </Select>
-      </FormControl>
-            <Button variant="outlined" onClick={savePersonalDetailsFunc} endIcon={<SaveAsIcon />}>
-  שמור...
-</Button>
-            </form>
-        </div>
-    )
-}
+ 
+    return (
+      <Container component="main" maxWidth="xs">
+        {/* <Typography component="h1" variant="h5">
+           פרטים אישיים
+        </Typography> */}
+        <form>
+          <Grid container spacing={2}>
+            <Grid item xs={5}>
+              <TextField
+                variant="standard"
+                required
+                fullWidth
+                id="age"
+                label="גיל"
+                value={age}
+                onChange={(e:any) => { setAge(Number(e.target.value)) }}
+                placeholder={String(user.age)}
+                type="number"
+                inputProps={{ min: 0 }}
+              />
+            </Grid>
+            <Grid item xs={5}>
+              <TextField
+                variant="standard"
+                required
+                fullWidth
+                id="weight"
+                label="משקל"
+                value={weight}
+                onChange={(e:any) => { setWeight(Number(e.target.value)) }}
+                type="number"
+                inputProps={{ min: 0 }}
+              />
+            </Grid>
+            <Grid item xs={5}>
+              <TextField
+                variant="standard"
+                required
+                fullWidth
+                id="height"
+                label="גובה"
+                value={height}
+                onChange={(e:any) => { setHeight(Number(e.target.value)) }}
+                type="number"
+                inputProps={{ min: 0 }}
+              />
+            </Grid>
+            <Grid item xs={5}>
+              <FormControl variant="standard" sx={{ minWidth: 120 }}>
+                <InputLabel id="demo-simple-select-standard-label">רמת כושר</InputLabel>
+                <Select
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  value={sportLevel}
+                  onChange={handleChangeSportLevel}
+                  label="רמת כושר"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={1}>נמוכה</MenuItem>
+                  <MenuItem value={2}>בינונית</MenuItem>
+                  <MenuItem value={3}>גבוהה</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={5}>
+              <FormControl variant="standard" sx={{ minWidth: 120 }}>
+                <InputLabel id="demo-simple-select-standard-label">מין</InputLabel>
+                <Select
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  value={gender}
+                  onChange={handleChangeGender}
+                  label="מין"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={1}>זכר</MenuItem>
+                  <MenuItem value={2}>נקבה</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <br></br>
+          </Grid>
+          <br></br>
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{ mt: 3, mb: 2, backgroundColor: '#FFB968' }}
+            onClick={savePersonalDetailsFunc}
+          >
+            אישור
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            fullWidth
+            
+            onClick={cancel}
+          >
+            ביטול
+          </Button>
+        </form>
+      </Container>
+    );
+  };
+  
+  export default RegisterPersonalDetails;

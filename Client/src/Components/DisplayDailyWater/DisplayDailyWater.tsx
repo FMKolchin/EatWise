@@ -19,14 +19,14 @@ const DisplayDailyWater = (props:any) => {
    setStateWater(props.user.dailyWater);
   });
   
- //const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
 
   const handleClick = (amountOfWater:number) => {    
     setStateWater(props.user.dailyWater)
     addWater(props.user.id,amountOfWater);
-
-  //dispatch(actions.onAddToDailyWaterRequest({ user: props.user.id,water:props.user.dailyWater }));
+     
+  //  dispatch(actions.onAddToDailyWaterRequest({ user: user,water:user.recommendedWater }));
   };
 
   const chartData = [

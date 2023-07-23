@@ -106,6 +106,7 @@ const SignUp = (): JSX.Element => {
             />
           </Grid>
         </Grid>
+        <br></br>
         <Button
           type="button"
           fullWidth
