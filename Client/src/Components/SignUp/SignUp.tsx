@@ -25,15 +25,14 @@ const SignUp = (): JSX.Element => {
     //בדיקת ולידציה לשם ולסיסמא
     if (validateUsername()) {
       try {
-        alert("in try sign up!!!!!!!!")
         await signUpUser(username, password, email);
         //ניתן למחוק בהמשך לטפל בנתוני הדאטה
         navigate('/registerPersonalDetails', { replace: true });
       } catch {
-        //דיווח למשתמש על התקלה
+       alert("you are already connected with this email account")
       }
     } else {
-      //דיווח למשתמש על בעיה בוולידציה
+    alert("userName not valid")
     }
   };
     
@@ -113,6 +112,7 @@ const SignUp = (): JSX.Element => {
           variant="contained"
           color="primary"
           onClick={authDetails}
+          sx={{ backgroundColor: '#31c48d' }}
         >
           Sign Up
         </Button>

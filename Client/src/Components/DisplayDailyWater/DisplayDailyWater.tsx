@@ -33,12 +33,14 @@ const DisplayDailyWater = (props:any) => {
   const chartData = [
     {
       type: 'Recommended Intake',
-      value: props.user.recommendedWater-stateWater,
-      color: "#31C48D"
+      value: props.user.recommendedWater-stateWater ,
+      color: "#31C48D",
+      
+      
     },
     {
       type: 'Current Intake',
-      value: stateWater,
+      value: stateWater ,
       color:"#FFB968"
     },
   ];
@@ -47,13 +49,14 @@ const DisplayDailyWater = (props:any) => {
   // };
   return (
     <div>
+        <h3>כמות השתיה היומית שלך </h3>
       <h3>מ"ל {stateWater}</h3>
-      <h3></h3>
-      <h3> מ"ל {props.user.recommendedWater}</h3>
-      <Button variant="contained"  onClick={() => { console.log("cliced now in Water: " ); handleClick(140) }}>
+      <h3>כמות השתיה המומלצת ליום במ"ל</h3>
+      <h3> {props.user.recommendedWater}</h3>
+      <Button variant="contained" sx={{ backgroundColor: '#31c48d' }} onClick={() => { console.log("cliced now in Water: " ); handleClick(140) }}>
         הוסף כוס
       </Button>
-      <Button variant="contained"  onClick={() => { console.log("cliced now in Water: " ); handleClick(500) }}>
+      <Button sx={{ backgroundColor: '#31c48d' }} variant="contained"  onClick={() => { console.log("cliced now in Water: " ); handleClick(500) }}>
        הוסף בקבוק
       </Button>
       <div style={{ marginTop: '20px', width: '300px' }}>
