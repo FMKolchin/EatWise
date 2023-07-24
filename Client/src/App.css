@@ -11,12 +11,12 @@
   will-change: filter;
   transition: filter 300ms;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+/* .logo:hover {
+  filter: drop-shadow(0 0 2em #FFB968);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+  filter: drop-shadow(0 0 2em #FFB968);
+} */
 
 @keyframes logo-spin {
   from {
@@ -39,4 +39,14 @@
 
 .read-the-docs {
   color: #888;
+}
+h3{
+  color: #FFB968;
+}
+.save:hover {
+  color:#FFB968;
+  background-color: #FFB968;
+}
+button:hover{
+  background-color: #FFB968; 
 }
