@@ -9,6 +9,7 @@ recommendedSugar,recommendedTotalFat, recocommendedWater} from "../../Services/c
 import { selectors } from "../../Redux/userSlice/slice";
 import { User } from "../../Models/User";
 import { useSelector } from "react-redux";
+import '../../App.css'
 
 
 
@@ -48,6 +49,7 @@ export const  RegisterPersonalDetails = ()=>{
     }
       return (
               <Container component="main" maxWidth="xs">
+     
                 {/* <Typography component="h1" variant="h5">
                    פרטים אישיים
                 </Typography> */}
@@ -139,6 +141,7 @@ export const  RegisterPersonalDetails = ()=>{
                     fullWidth
                     sx={{backgroundColor:"#FFB968", mt: 3, mb: 2 }}
                     onClick={savePersonalDetailsFunc}
+        className="save"
                   >
                     אישור
                   </Button>
