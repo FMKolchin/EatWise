@@ -25,7 +25,7 @@ const DisplayDailyWater = (props:any) => {
   const handleClick = (amountOfWater:number) => {    
     setStateWater(props.user.dailyWater)
     addWater(props.user.id,amountOfWater);
-    window.location.reload();
+     window.location.reload();
 
   //dispatch(actions.onAddToDailyWaterRequest({ user: props.user.id,water:props.user.dailyWater }));
   };
@@ -44,6 +44,9 @@ const DisplayDailyWater = (props:any) => {
       color:"#FFB968"
     },
   ];
+  console.log(chartData);
+  
+  
   // const handleAddCup = () => {
   //   setCups(cups + 1);
   // };
