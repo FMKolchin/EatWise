@@ -4,10 +4,6 @@ import { useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { ChangeAccountDetails } from "./ChangeAccountDetails";
 import { RegisterPersonalDetails } from "../RegisterPersonalDetails/RegisterPersonalDetails";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { ChangeAccountDetails } from "./ChangeAccountDetails";
-import { RegisterPersonalDetails } from "../RegisterPersonalDetails/RegisterPersonalDetails";
-
 
 export const Settings = () =>{
     return (
