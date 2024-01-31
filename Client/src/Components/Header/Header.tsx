@@ -17,9 +17,20 @@ export default function Header() {
   const navigateHome = () =>{
     navigate('/home')
   }
+  const navigateContactUs = () =>{
+    navigate('/contactUs')
+  }
+  const navigateAbout= () =>{
+    navigate('/about')
+  }
+
+  const navigateArticle=() =>{
+    navigate('/article')
+  }
 
   return (
-    <><Box sx={{ flexGrow: 1 }}>
+    <>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" sx={{backgroundColor:"#31C48D"}}>
         <Toolbar>
 
@@ -37,12 +48,18 @@ export default function Header() {
       > */}
       <Button onClick={navigateHome} >
         <img src={LogoIcon} style={{width:60,height:35}}  />
-      {/* </IconButton> */}</Button>
-          {/* </Box> */}
+      </Button>
+      <Button onClick={navigateAbout} >
+       about
+      </Button>
+      <Button onClick={navigateArticle} >
+       article
+      </Button>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <SettingsButton></SettingsButton>
           </Box>
- 
+
+          <Button onClick={navigateContactUs} >contact us</Button> 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Disconnect></Disconnect>
           </Box>

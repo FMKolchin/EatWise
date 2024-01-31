@@ -22,7 +22,6 @@ export const addNutValues = async (user:User,nut:Nutrition):Promise<User>=>{
    return user;
    
 }
-
 export const addFoodOption = async(_user:User,nut:Nutrition) =>{
    console.log("start addFoodOption: "+JSON.stringify(_user)+"\n"+JSON.stringify(nut));
    let userT:any =(await axios.put(`${config.api}/nutrition/addFoodOption`,{userId:_user.id,nut:nut})).data;
@@ -30,5 +29,4 @@ export const addFoodOption = async(_user:User,nut:Nutrition) =>{
    let user:User = await anyToUser(userT);
    console.log("result back from anyToUser: "+JSON.stringify(user));
    return user;
-
 }

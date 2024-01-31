@@ -98,38 +98,40 @@ export const  RegisterPersonalDetails = ()=>{
                     <Grid item xs={5}>
                       <FormControl variant="standard" sx={{ minWidth: 120 }}>
                         <InputLabel id="demo-simple-select-standard-label">רמת כושר</InputLabel>
-                        <Select
-                          labelId="demo-simple-select-standard-label"
-                          id="demo-simple-select-standard"
-                          value={sportLevel}
-                          onChange={handleChangeSportLevel}
-                          label="רמת כושר"
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                          <MenuItem value={1}>נמוכה</MenuItem>
-                          <MenuItem value={2}>בינונית</MenuItem>
-                          <MenuItem value={3}>גבוהה</MenuItem>
-                        </Select>
+                   <Select
+  labelId="demo-simple-select-standard-label"
+  id="demo-simple-select-standard"
+  value={sportLevel}
+  onChange={handleChangeSportLevel}
+  label="רמת כושר"
+  required  // הוספת ה-attribue required
+>
+  <MenuItem value="">
+    <em>None</em>
+  </MenuItem>
+  <MenuItem value={1}>נמוכה</MenuItem>
+  <MenuItem value={2}>בינונית</MenuItem>
+  <MenuItem value={3}>גבוהה</MenuItem>
+</Select>
                       </FormControl>
                     </Grid>
                     <Grid item xs={5}>
                       <FormControl variant="standard" sx={{ minWidth: 120 }}>
                         <InputLabel id="demo-simple-select-standard-label">מין</InputLabel>
                         <Select
-                          labelId="demo-simple-select-standard-label"
-                          id="demo-simple-select-standard"
-                          value={gender}
-                          onChange={handleChangeGender}
-                          label="מין"
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                          <MenuItem value={1}>זכר</MenuItem>
-                          <MenuItem value={2}>נקבה</MenuItem>
-                        </Select>
+  labelId="demo-simple-select-standard-label"
+  id="demo-simple-select-standard"
+  value={gender}
+  onChange={handleChangeGender}
+  label="מין"
+  required  // הוספת ה-attribue required
+>
+  <MenuItem value="">
+    <em>None</em>
+  </MenuItem>
+  <MenuItem value={1}>זכר</MenuItem>
+  <MenuItem value={2}>נקבה</MenuItem>
+</Select>
                       </FormControl>
                     </Grid>
                     <br></br>

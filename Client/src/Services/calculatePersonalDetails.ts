@@ -2,7 +2,8 @@
 //     return weight/Math.pow(height,2);
 // }
 
-export function recommendedCalories(age: number, weight: number, height: number,gender:number): number {
+export function recommendedCalories(age: number, weight: number, height: number,
+  gender:number): number {
     // Constants for calorie calculation
     const BMR_CONSTANT = 10; // Basal Metabolic Rate constant
     const WEIGHT_CONSTANT = 6.25; // Weight constant
@@ -15,13 +16,14 @@ export function recommendedCalories(age: number, weight: number, height: number,
   
     // Calculate Basal Metabolic Rate (BMR) based on gender
     if (gender === 1) {
-      BMR = (WEIGHT_CONSTANT * weight) + (HEIGHT_CONSTANT * height) - (AGE_CONSTANT * age) + BMR_CONSTANT;
+      BMR = (WEIGHT_CONSTANT * weight) + (HEIGHT_CONSTANT * height) - (AGE_CONSTANT * age)
+       + BMR_CONSTANT;
     } else if (gender === 2) {
-      BMR = (WEIGHT_CONSTANT * weight) + (HEIGHT_CONSTANT * height) - (AGE_CONSTANT * age) + FEMALE_CONSTANT;
+      BMR = (WEIGHT_CONSTANT * weight) + (HEIGHT_CONSTANT * height) - (AGE_CONSTANT * age) 
+      + FEMALE_CONSTANT;
     } else {
       throw new Error('Invalid gender');
     }
-  
     return BMR;
   }
   
