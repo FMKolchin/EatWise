@@ -86,4 +86,4 @@ const DisplayDailyWater = (props:any) => {
   );
 };
 
-export default DisplayDailyWater;
+export default DisplayDailyWater; 

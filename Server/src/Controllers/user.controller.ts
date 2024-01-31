@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
-import { addWater, changeDetails, login, savePersonalDetails, signup, updateDays } from '../Services/user.service';
+import { ContactUs, addWater, changeDetails, forgetPassword, login, savePersonalDetails, signup, updateDays } from '../Services/user.service';
 import { promises } from 'dns';
+const mailer=require('../Services/nodeMailer');
 
 export const loginCtrl = async (req: Request, res: Response)  => {
     const { username, password } = req.body;
@@ -14,21 +15,31 @@ export const loginCtrl = async (req: Request, res: Response)  => {
   
     
   }
+  export const forgetPasswordCtrl=async (req: Request, res: Response) => {  
+    const { username } = req.body;
+    console.log(username);
+    console.log("in forgetCtrl")
+   await forgetPassword(username);
+    // }
+    // catch (error:any){
+    //     res.status(500).send('Failed to send email');
+    // }
+  
+  }
 
-export const signupCtrl = async (req: Request, res: Response) => {
-    
+export const signupCtrl = async (req: Request, res: Response) => {    
       const { username,email, password } = req.body;
       let result:string;
       try {
+        console.log("in try signup")
          result = await signup(username,email, password);
+           //קריאה לפונקציית שליחת המייל
+            //הודעת ברוכים הבאים לאתר
       } catch (error) {
+        console.log("in catch controller")
         throw error;
-      }
-      
-      
-      
+      } 
       res.send(result);
-  
   }
 
 export const savePersonalDetailsCtrl = async (req: Request, res:Response)=>{
@@ -73,4 +84,31 @@ export const addWaterCtrl = async (req: Request, res: Response) => {
   console.log("water  "+water);
   await addWater( userId,water);
   res.send();
+}
+export const ContactUsCtrl=async (req: Request, res: Response) => {  
+  const { username,email,subject,content } = req.body;
+  console.log(username);
+  console.log("in ContactUsCtrl")
+ await ContactUs(username,email,subject,content);
+ res.send();
+  // }
+  // catch (error:any){
+  //     res.status(500).send('Failed to send email');
+  // }
+
+}
+const mail=()=>{
+//   console.log("pass "+password)
+//   const to=password;
+// const subject="Hi "+username+', Welcome to our site';
+// const body='Thank you for registering';
+// mailer.sendEmail(to, subject, body)
+// .then((info: { response: any; }) => {
+// console.log('Email sent: ', info.response);
+// res.send('Registration successful');
+// })
+// .catch((error: any) => {
+// console.log('Error sending email: ', error);
+// res.status(500).send('Failed to send email');
+// });
 }

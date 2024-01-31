@@ -6,7 +6,7 @@ import { DisplayDailyConsumption } from "../DisplayDailyConsumption/DisplayDaily
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "../../Redux/userSlice/slice";
 import Header from "../Header/Header";
-import { Grid } from "@mui/material";
+import { Card, Grid } from "@mui/material";
 import DisplayDailyWater from "../DisplayDailyWater/DisplayDailyWater";
 import { DisplayWeeklyConsumption } from "../DisplayWeeklyConsumption/DisplayWeeklyConsumption";
 import { User } from "../../Models/User";
@@ -44,17 +44,19 @@ export const Home = () => {
 
     return (
         <div>
-           <Header></Header>
+           <Header/>
             <br />
             <br />
-            <Grid container>
+            <Grid container  spacing={2}>
                 <Grid item>
-                    <Grid container>
+                    <Grid container spacing={2}>
                         <Grid item>
+            <Card variant="outlined">
                             <DisplayDailyConsumption user={user}></DisplayDailyConsumption>
-                        </Grid>
+                        </Card></Grid>
                         <Grid item>
-                            <DisplayDailyWater user={user}></DisplayDailyWater>
+            
+                  <Card variant="outlined"><DisplayDailyWater user={user}></DisplayDailyWater></Card>
                         </Grid>
                     </Grid>
                    

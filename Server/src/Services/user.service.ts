@@ -8,6 +8,7 @@ const connectDB = require('../ConnectDB');
 const objectId = require("mongodb").ObjectId;
 import { codeJWT, decodeJWT } from "./token.service";
 import { Console } from "console";
+const mailer=require('../Services/nodeMailer');
 
 
  export const login = async (username: string, password: string): Promise<string> => {
@@ -17,7 +18,7 @@ import { Console } from "console";
   }
   let user: User = foundUser[0];
   const token = codeJWT(user.username, user.email, user._id,);
-  return token;
+ return token;
 }
  export const signup = async (username: string, password: string, email: string): Promise<string> => {
   const _id = new objectId();
@@ -26,8 +27,9 @@ import { Console } from "console";
   if (foundUsers.length == 0) {
     createdUser = await createUser({ _id: _id, username: username, password: password, email: email,weeklyConsumpstion:["","","","","","",""], })
     //create & return token
-    const token = codeJWT(createdUser.username, createdUser.email, createdUser._id);
-    return token;
+    
+  const token = codeJWT(createdUser.username, createdUser.email, createdUser._id);
+  return token;
   }
   else {
         throw new ClientError("you are already connected with this email account");
@@ -211,6 +213,42 @@ export const getDateInString = ():string =>{
   let fullDate:Date = new Date();
   let date:Date = new Date(fullDate.getFullYear(), fullDate.getMonth(), fullDate.getDate());
   return date.toString();
+}
+export const forgetPassword=async (username: string) => {
+    // console.log("in service forgetPassword")
+  let foundUser: User[] = await UserModel.find({ username: username });
+    if (foundUser.length === 0) {
+      throw new NotFoundError();
+    }
+    console.log("in forgetPassword service");
+    const to=foundUser[0].email;
+    const subject="Hi "+foundUser[0].username+',';
+    const body='פרטי ההתחברות שלך'+'סיסמה: '+foundUser[0].password;
+    mailer.sendEmail(to, subject, body)
+    .then((info: { response: any; }) => {
+        console.log('Email sent: ', info.response);
+        // res.send('Registration successful');
+    })
+    .catch((error: any) => {
+        console.log('Error sending email: ', error);
+        // res.status(500).send('Failed to send email');
+    });
+
+}
+export const ContactUs=async (username: string,email:string,subject:string,content:string) => {
+  console.log("in service ContactUs")
+const to="eatwise.nutrition@gmail.com";
+const body="from "+email+" , "+content;
+  mailer.sendEmail(to, subject, body)
+  .then((info: { response: any; }) => {
+      console.log('Email sent: ', info.response);
+   // res.send('Registration successful');
+  })
+  .catch((error: any) => {
+      console.log('Error sending email: ', error);
+      // res.status(500).send('Failed to send email');
+  });
+
 }
 
 

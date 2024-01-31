@@ -21,7 +21,15 @@ export const loginUser = async (username : string, password : string):Promise<st
         return res;
    
 }
+export const forgetPassword=async (username : string, password : string):Promise<string|null> =>{
+    // alert("in api forgetPas");
+    let data:AxiosResponse|null = null;
+    let res :string|null = null;
+    data= await axios.post(`${config.api}/user/forgetPassword`, {username: username, password: password});
+    res = data?.data;
 
+            return res;
+}
 export const signUpUser = async (username : string,email: string, password : string):Promise<string|null> =>{
     // debugger;
     let data:AxiosResponse|null = null;
@@ -82,4 +90,27 @@ export const changeDetails=async(username : string,email: string, password : str
 export const addWater = async (userId:string,dailyWater:number)=>{
   await axios.post(`${config.api}/user/addWater`,{userId:userId,dailyWater:dailyWater});
 
+}
+export const sendContactUs = async (username : string,email: string, subject : string,content:string):Promise<string|null> =>{
+    // debugger;
+    let data:AxiosResponse|null = null;
+    let res :string|null = null;
+    try {
+        data =await axios.post(`${config.api}/user/contactUs`, {username: username,email: email, subject: subject,content:content});
+        if(data?.status &&(data?.status >299 || data?.status < 200)){
+            throw new Error("error inserting");
+        }
+
+
+    } catch (error:any) {
+        if(error.response && error.response.status === 400){
+            console.log("ERROR: my error user api "+error);
+        }
+        else{
+            console.log("ERROR:not my error user api "+error);
+        }
+        throw error;
+    }
+        return res;
+   
 }
